@@ -1,10 +1,14 @@
-// src/TicketBooking.js
 import React, { useState } from 'react';
 
 const TicketBooking = ({ movie }) => {
     const [selectedShowtime, setSelectedShowtime] = useState('');
     const [tickets, setTickets] = useState(1);
     const [isBooked, setIsBooked] = useState(false);
+
+    // Check if the movie object exists and has a title
+    if (!movie || !movie.title) {
+        return <p>Loading movie details...</p>;
+    }
 
     const handleShowtimeChange = (e) => {
         setSelectedShowtime(e.target.value);
@@ -32,7 +36,7 @@ const TicketBooking = ({ movie }) => {
                         <label>Select Showtime:</label>
                         <select value={selectedShowtime} onChange={handleShowtimeChange} required>
                             <option value="">Select a showtime</option>
-                            {movie.showtimes.map((time, index) => (
+                            {movie.showtimes && movie.showtimes.map((time, index) => (
                                 <option key={index} value={time}>{time}</option>
                             ))}
                         </select>
@@ -57,3 +61,4 @@ const TicketBooking = ({ movie }) => {
 };
 
 export default TicketBooking;
+
