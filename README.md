@@ -1,3 +1,0 @@
-# FrontEndMB
-
-Members: Shruti & Shaan
