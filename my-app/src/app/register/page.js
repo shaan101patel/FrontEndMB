@@ -1,129 +1,242 @@
-"use client"; // This marks the file as a Client Component
+"use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Registration = () => {
-  // State to manage form input values
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+    const router = useRouter();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
-  // State to handle form submission and errors
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+    // Optional billing fields
+    const [billingAddress, setBillingAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [postalCode, setPostalCode] = useState('');
+    const [country, setCountry] = useState('');
+    const [creditCardNumber, setCreditCardNumber] = useState('');
+    const [expiryDate, setExpiryDate] = useState('');
+    const [cvv, setCvv] = useState('');
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    // Basic validation
-    if (!name || !email || !password || !confirmPassword) {
-      setError('Please fill out all fields.');
-      return;
-    }
+        if (!name || !email || !password || !confirmPassword) {
+            setError('Please fill out all required fields.');
+            return;
+        }
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
+        if (password !== confirmPassword) {
+            setError('Passwords do not match.');
+            return;
+        }
 
-    // Clear errors and show success message
-    setError('');
-    setSuccess('Registration successful!');
+        setError('');
+        setSuccess('Registration successful!');
 
-    // Perform registration logic (API call, etc.)
-    console.log('Registering with:', { name, email, password });
+        console.log('Registering with:', { name, email, password, billingAddress, creditCardNumber });
 
-    // Reset form (optional)
-    setName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-  };
+        router.push('/register/confirmation');
+    };
 
-  return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="w-full max-w-md">
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <h2 className="text-center text-xl font-bold mb-4">Register</h2>
+    return (
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+            <div className="w-full max-w-lg">
+                <div className="bg-white py-8 px-4 shadow rounded-lg sm:px-10">
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <h2 className="text-center text-2xl font-extrabold text-gray-900">Register</h2>
 
-          {error && <p className="text-red-500 text-xs italic">{error}</p>}
-          {success && <p className="text-green-500 text-xs italic">{success}</p>}
+                        {error && <p className="text-red-500 text-xs italic">{error}</p>}
+                        {success && <p className="text-green-500 text-xs italic">{success}</p>}
 
-          {/* Name Input */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-              Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
+                        {/* Name (Required) */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700" htmlFor="name">
+                                Name <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                id="name"
+                                type="text"
+                                placeholder="Enter your name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
 
-          {/* Email Input */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
+                        {/* Email (Required) */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700" htmlFor="email">
+                                Email <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
 
-          {/* Password Input */}
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
+                        {/* Password (Required) */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700" htmlFor="password">
+                                Password <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                id="password"
+                                type="password"
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
 
-          {/* Confirm Password Input */}
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
-              Confirm Password
-            </label>
-            <input
-              id="confirmPassword"
-              type="password"
-              placeholder="Confirm your password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
+                        {/* Confirm Password (Required) */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700" htmlFor="confirmPassword">
+                                Confirm Password <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                id="confirmPassword"
+                                type="password"
+                                placeholder="Confirm your password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
 
-          {/* Submit Button */}
-          <div className="flex items-center justify-between">
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Register
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
+                        {/* Billing Information (Optional) */}
+                        <h3 className="text-lg font-semibold mt-4">Billing Information (Optional)</h3>
+
+                        {/* Billing Address */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700" htmlFor="billingAddress">
+                                Billing Address
+                            </label>
+                            <input
+                                id="billingAddress"
+                                type="text"
+                                placeholder="Enter your billing address"
+                                value={billingAddress}
+                                onChange={(e) => setBillingAddress(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
+
+                        {/* City */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700" htmlFor="city">
+                                City
+                            </label>
+                            <input
+                                id="city"
+                                type="text"
+                                placeholder="Enter your city"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
+
+                        {/* Postal Code */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700" htmlFor="postalCode">
+                                Postal Code
+                            </label>
+                            <input
+                                id="postalCode"
+                                type="text"
+                                placeholder="Enter your postal code"
+                                value={postalCode}
+                                onChange={(e) => setPostalCode(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
+
+                        {/* Country */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700" htmlFor="country">
+                                Country
+                            </label>
+                            <input
+                                id="country"
+                                type="text"
+                                placeholder="Enter your country"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
+
+                        {/* Credit Card Information */}
+                        <h3 className="text-lg font-semibold mt-4">Credit Card Information</h3>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700" htmlFor="creditCardNumber">
+                                Credit Card Number
+                            </label>
+                            <input
+                                id="creditCardNumber"
+                                type="text"
+                                placeholder="Enter your credit card number"
+                                value={creditCardNumber}
+                                onChange={(e) => setCreditCardNumber(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
+
+                        <div className="flex space-x-4">
+                            {/* Expiry Date */}
+                            <div className="w-1/2">
+                                <label className="block text-sm font-medium text-gray-700" htmlFor="expiryDate">
+                                    Expiry Date
+                                </label>
+                                <input
+                                    id="expiryDate"
+                                    type="text"
+                                    placeholder="MM/YY"
+                                    value={expiryDate}
+                                    onChange={(e) => setExpiryDate(e.target.value)}
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                />
+                            </div>
+
+                            {/* CVV */}
+                            <div className="w-1/2">
+                                <label className="block text-sm font-medium text-gray-700" htmlFor="cvv">
+                                    CVV
+                                </label>
+                                <input
+                                    id="cvv"
+                                    type="text"
+                                    placeholder="CVV"
+                                    value={cvv}
+                                    onChange={(e) => setCvv(e.target.value)}
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Submit Button */}
+                        <div>
+                            <button
+                                type="submit"
+                                className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            >
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Registration;
