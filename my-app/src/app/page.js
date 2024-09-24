@@ -62,7 +62,8 @@ export default function Home() {
                     margin: '10px',
                     padding: '10px',
                     width: '200px',
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    overflow: 'hidden' // Ensures content stays inside the box
                 }}>
                     <img
                         src={movie.moviePoster}
@@ -76,9 +77,26 @@ export default function Home() {
                     <p><strong>Rating:</strong> {movie.movieRating}</p>
                     <p><strong>Length:</strong> {movie.movieLength}</p>
                     <p><strong>Description:</strong> {movie.shortDescription}</p>
-                    <a href={movie.trailerUrl} target="_blank" rel="noopener noreferrer">
-                        Watch Trailer
-                    </a>
+
+                    {/* Embed YouTube Trailer with adjusted size and fit */}
+                    <div style={{ position: 'relative', paddingTop: '56.25%', overflow: 'hidden' }}>
+                        <iframe
+                            src={movie.trailerUrl.replace('watch?v=', 'embed/')}
+                            title={movie.movieName}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            style={{
+                                position: 'absolute',
+                                top: '0',
+                                left: '0',
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover', // Ensures the video fits in the container
+                                borderRadius: '8px'
+                            }}
+                        />
+                    </div>
                 </div>
             ))}
         </div>
@@ -109,6 +127,9 @@ export default function Home() {
         </div>
     );
 }
+
+
+
 
 
 
