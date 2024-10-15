@@ -1,6 +1,9 @@
+// app/promotions/page.js
+
 "use client";
 
 import React, { useState } from 'react';
+import './page.css';
 
 export default function ManagePromotions() {
     const [promotions, setPromotions] = useState([
@@ -29,50 +32,50 @@ export default function ManagePromotions() {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-4 bg-white shadow-lg rounded-lg">
-            <h2 className="text-2xl font-bold mb-4 text-black">Manage Promotions</h2>
+        <div className="promotions-container">
+            <h2 className="promotions-title">Manage Promotions</h2>
 
-            <div className="mb-4">
-                <h3 className="font-semibold text-black">Add New Promotion</h3>
+            <div className="add-promotion-section">
+                <h3 className="section-subtitle">Add New Promotion</h3>
                 <input
                     type="text"
                     placeholder="Promotion Title"
                     value={newPromotion.title}
                     onChange={(e) => setNewPromotion({ ...newPromotion, title: e.target.value })}
-                    className="border rounded w-full p-2 mb-2"
+                    className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Discount (e.g., 20%)"
                     value={newPromotion.discount}
                     onChange={(e) => setNewPromotion({ ...newPromotion, discount: e.target.value })}
-                    className="border rounded w-full p-2 mb-2"
+                    className="input-field"
                 />
                 <input
                     type="date"
                     value={newPromotion.validUntil}
                     onChange={(e) => setNewPromotion({ ...newPromotion, validUntil: e.target.value })}
-                    className="border rounded w-full p-2 mb-2"
+                    className="input-field"
                 />
                 <button
                     onClick={handleAddPromotion}
-                    className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+                    className="add-button"
                 >
                     Add Promotion
                 </button>
             </div>
 
-            <ul className="divide-y divide-gray-300">
+            <ul className="promotions-list">
                 {promotions.map((promotion) => (
-                    <li key={promotion.id} className="py-2 flex justify-between items-center">
+                    <li key={promotion.id} className="promotion-item">
                         <div>
-                            <p className="font-semibold text-black">{promotion.title}</p>
-                            <p className="text-black">Discount: {promotion.discount}</p>
-                            <p className="text-black">Valid Until: {promotion.validUntil}</p>
+                            <p className="promotion-title">{promotion.title}</p>
+                            <p className="promotion-details">Discount: {promotion.discount}</p>
+                            <p className="promotion-details">Valid Until: {promotion.validUntil}</p>
                         </div>
                         <button
                             onClick={() => handleDeletePromotion(promotion.id)}
-                            className="text-red-500 hover:underline"
+                            className="delete-button"
                         >
                             Delete
                         </button>
@@ -82,4 +85,3 @@ export default function ManagePromotions() {
         </div>
     );
 }
-

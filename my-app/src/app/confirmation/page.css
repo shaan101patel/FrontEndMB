@@ -1,0 +1,49 @@
+/* app/confirmation/page.css */
+
+.confirmation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+.confirmation-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+}
+
+.confirmation-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.confirmation-text {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.confirmation-button-container {
+    text-align: center;
+}
+
+.confirmation-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.confirmation-button:hover {
+    background-color: #0056b3;
+}

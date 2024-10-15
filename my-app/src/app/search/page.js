@@ -1,7 +1,9 @@
+// components/SearchBar.js
 
 "use client";
 
 import React, { useState } from 'react';
+import './page.css';
 
 const SearchBar = ({ onSearch }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -13,14 +15,17 @@ const SearchBar = ({ onSearch }) => {
     };
 
     return (
-        <div>
+        <div className="search-bar-container">
             <input
                 type="text"
                 placeholder="Search for a movie..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
             />
-            <button onClick={handleSearch}>Search</button>
+            <button onClick={handleSearch} className="search-button">
+                Search
+            </button>
         </div>
     );
 };

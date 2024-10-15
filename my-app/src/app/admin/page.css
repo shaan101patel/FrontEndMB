@@ -1,0 +1,37 @@
+/* app/admin/page.css */
+
+.admin-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.admin-title {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.admin-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.admin-card {
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #eaf2f8;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-card-title {
+    margin: 0 0 10px;
+    color: #007bff;
+}
+
+.admin-card-text {
+    margin: 0;
+    color: #666;
+}

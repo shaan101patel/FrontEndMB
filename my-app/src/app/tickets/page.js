@@ -1,6 +1,9 @@
+// app/tickets/page.js
+
 "use client";
 
 import React, { useState } from 'react';
+import './page.css';
 
 // Sample data for movies and showtimes
 const moviesData = [
@@ -50,18 +53,18 @@ export default function TicketPurchase() {
     const allAgesEntered = selectedSeats.every(seat => ages[seat] > 0);
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4 text-black">
-            <div className="w-full max-w-4xl bg-white shadow-lg rounded p-6">
-                <h2 className="text-2xl font-bold mb-4">Purchase Tickets</h2>
+        <div className="ticket-purchase-container">
+            <div className="ticket-purchase-card">
+                <h2 className="ticket-purchase-title">Purchase Tickets</h2>
 
                 {/* Movie Selection */}
-                <h3 className="text-lg font-semibold mb-2">Select Movie</h3>
-                <ul className="mb-4">
+                <h3 className="section-title">Select Movie</h3>
+                <ul className="movie-list">
                     {moviesData.map(movie => (
                         <li key={movie.id}>
                             <button
                                 onClick={() => handleSelectMovie(movie)}
-                                className={`w-full text-left p-2 rounded ${selectedMovie?.id === movie.id ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                                className={`movie-button ${selectedMovie?.id === movie.id ? 'selected' : ''}`}
                             >
                                 {movie.title}
                             </button>
@@ -72,13 +75,13 @@ export default function TicketPurchase() {
                 {/* Showtime Selection */}
                 {selectedMovie && (
                     <>
-                        <h3 className="text-lg font-semibold mb-2">Select Showtime</h3>
-                        <ul className="mb-4">
+                        <h3 className="section-title">Select Showtime</h3>
+                        <ul className="showtime-list">
                             {selectedMovie.showtimes.map((time, index) => (
                                 <li key={index}>
                                     <button
                                         onClick={() => handleSelectShowtime(time)}
-                                        className={`w-full text-left p-2 rounded ${selectedShowtime === time ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                                        className={`showtime-button ${selectedShowtime === time ? 'selected' : ''}`}
                                     >
                                         {time}
                                     </button>
@@ -91,43 +94,43 @@ export default function TicketPurchase() {
                 {/* Seat Selection */}
                 {selectedShowtime && (
                     <>
-                        <div className="flex flex-col items-center mb-4">
-                            <h3 className="text-lg font-semibold mb-2">Select Seats</h3>
+                        <div className="seat-selection-section">
+                            <h3 className="section-title">Select Seats</h3>
 
                             {/* Key for Seat Colors */}
-                            <div className="flex space-x-4 mb-4">
-                                <div className="flex items-center">
-                                    <button className="w-6 h-6 bg-gray-300 rounded mr-2"></button>
+                            <div className="seat-key">
+                                <div className="seat-key-item">
+                                    <div className="seat available"></div>
                                     <span>Available</span>
                                 </div>
-                                <div className="flex items-center">
-                                    <button className="w-6 h-6 bg-blue-500 rounded mr-2"></button>
+                                <div className="seat-key-item">
+                                    <div className="seat selected"></div>
                                     <span>Selected</span>
                                 </div>
-                                <div className="flex items-center">
-                                    <button className="w-6 h-6 bg-red-300 rounded mr-2"></button>
+                                <div className="seat-key-item">
+                                    <div className="seat taken"></div>
                                     <span>Taken</span>
                                 </div>
                             </div>
 
                             {/* Seating Chart */}
-                            <div className="overflow-x-auto">
-                                <div className="grid grid-cols-6 gap-2 mb-4">
+                            <div className="seating-chart">
+                                <div className="chart-grid">
                                     {/* Empty Column for Row Labels */}
                                     <div></div>
                                     {seatingChart[0].map((_, colIndex) => (
-                                        <div key={colIndex} className="text-center font-semibold">{colIndex + 1}</div>
+                                        <div key={colIndex} className="seat-label">{colIndex + 1}</div>
                                     ))}
                                     {seatingChart.map((row, rowIndex) => (
                                         <React.Fragment key={rowIndex}>
                                             {/* Row Label */}
-                                            <div className="text-center font-semibold">{String.fromCharCode(65 + rowIndex)}</div>
+                                            <div className="seat-label">{String.fromCharCode(65 + rowIndex)}</div>
                                             {row.map(({ seat, isAvailable }) => (
                                                 <button
                                                     key={seat}
                                                     onClick={() => isAvailable && handleSeatSelection(seat)}
-                                                    className={`w-12 h-12 m-1 rounded ${isAvailable ? (selectedSeats.includes(seat) ? 'bg-blue-500 text-white' : 'bg-gray-300') : 'bg-red-300'} flex items-center justify-center`}
-                                                    disabled={!isAvailable} // Disable button if seat is not available
+                                                    className={`seat ${isAvailable ? (selectedSeats.includes(seat) ? 'selected' : 'available') : 'taken'}`}
+                                                    disabled={!isAvailable}
                                                 >
                                                     {seat}
                                                 </button>
@@ -137,16 +140,16 @@ export default function TicketPurchase() {
                                 </div>
                             </div>
 
-                            <div className="mb-4">
+                            {/* Age Input */}
+                            <div className="age-input-section">
                                 {selectedSeats.map(seat => (
-                                    <div key={seat} className="flex items-center mb-2">
-                                        <span className="mr-2">Seat {seat}:</span>
+                                    <div key={seat} className="age-input-item">
+                                        <span>Seat {seat}:</span>
                                         <input
                                             type="number"
                                             placeholder="Age"
                                             min="0"
                                             onChange={(e) => handleAgeChange(seat, e.target.value)}
-                                            className="border rounded p-1"
                                             value={ages[seat] || ''}
                                         />
                                     </div>
@@ -156,11 +159,11 @@ export default function TicketPurchase() {
                     </>
                 )}
 
-                {/* Summary Button */}
+                {/* Confirm Button */}
                 {selectedShowtime && selectedSeats.length > 0 && (
                     <button
                         onClick={() => alert('Tickets confirmed!')}
-                        className={`bg-blue-500 text-white py-2 rounded hover:bg-blue-600 w-full ${allAgesEntered ? '' : 'opacity-50 cursor-not-allowed'}`}
+                        className={`confirm-button ${allAgesEntered ? '' : 'disabled'}`}
                         disabled={!allAgesEntered}
                     >
                         Confirm Tickets
@@ -170,7 +173,6 @@ export default function TicketPurchase() {
         </div>
     );
 }
-
 
 
 

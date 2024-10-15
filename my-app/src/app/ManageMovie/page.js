@@ -1,6 +1,9 @@
+// app/ManageMovie/page.js
+
 "use client";
 
 import React, { useState } from 'react';
+import './page.css'; // Import the CSS file
 
 export default function ManageMovies() {
     const [movies, setMovies] = useState([
@@ -29,43 +32,43 @@ export default function ManageMovies() {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-4 bg-white shadow-lg rounded-lg">
-            <h2 className="text-2xl font-bold mb-4 text-black">Manage Movies</h2>
+        <div className="manage-movies-container">
+            <h2 className="manage-movies-title">Manage Movies</h2>
 
-            <div className="mb-4">
-                <h3 className="font-semibold text-black">Add New Movie</h3>
+            <div className="add-movie-section">
+                <h3 className="section-subtitle">Add New Movie</h3>
                 <input
                     type="text"
                     placeholder="Movie Title"
                     value={newMovie.title}
                     onChange={(e) => setNewMovie({ ...newMovie, title: e.target.value })}
-                    className="border rounded w-full p-2 mb-2"
+                    className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Schedule (e.g., 12:00 PM)"
                     value={newMovie.schedule}
                     onChange={(e) => setNewMovie({ ...newMovie, schedule: e.target.value })}
-                    className="border rounded w-full p-2 mb-2"
+                    className="input-field"
                 />
                 <button
                     onClick={handleAddMovie}
-                    className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+                    className="add-button"
                 >
                     Add Movie
                 </button>
             </div>
 
-            <ul className="divide-y divide-gray-300">
+            <ul className="movies-list">
                 {movies.map((movie) => (
-                    <li key={movie.id} className="py-2 flex justify-between items-center">
+                    <li key={movie.id} className="movie-item">
                         <div>
-                            <p className="font-semibold text-black">{movie.title}</p>
-                            <p className="text-black">Schedule: {movie.schedule}</p>
+                            <p className="movie-title">{movie.title}</p>
+                            <p className="movie-schedule">Schedule: {movie.schedule}</p>
                         </div>
                         <button
                             onClick={() => handleDeleteMovie(movie.id)}
-                            className="text-red-500 hover:underline"
+                            className="delete-button"
                         >
                             Delete
                         </button>

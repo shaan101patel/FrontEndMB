@@ -1,7 +1,10 @@
+// app/register/page.js
+
 "use client";
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import './page.css';
 
 const Registration = () => {
     const router = useRouter();
@@ -43,197 +46,165 @@ const Registration = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 sm:px-6 lg:px-8">
-            <div className="w-full max-w-lg">
-                <div className="bg-white py-8 px-4 shadow rounded-lg sm:px-10">
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <h2 className="text-center text-2xl font-extrabold text-gray-900">Register</h2>
+        <div className="registration-container">
+            <div className="registration-card">
+                <form onSubmit={handleSubmit} className="registration-form">
+                    <h2 className="registration-title">Register</h2>
 
-                        {error && <p className="text-red-500 text-xs italic">{error}</p>}
-                        {success && <p className="text-green-500 text-xs italic">{success}</p>}
+                    {error && <p className="error-message">{error}</p>}
+                    {success && <p className="success-message">{success}</p>}
 
-                        {/* Name (Required) */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="name">
-                                Name <span className="text-red-500">*</span>
-                            </label>
+                    {/* Name (Required) */}
+                    <div className="form-group">
+                        <label htmlFor="name">
+                            Name <span className="required">*</span>
+                        </label>
+                        <input
+                            id="name"
+                            type="text"
+                            placeholder="Enter your name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+
+                    {/* Email (Required) */}
+                    <div className="form-group">
+                        <label htmlFor="email">
+                            Email <span className="required">*</span>
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+
+                    {/* Password (Required) */}
+                    <div className="form-group">
+                        <label htmlFor="password">
+                            Password <span className="required">*</span>
+                        </label>
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+
+                    {/* Confirm Password (Required) */}
+                    <div className="form-group">
+                        <label htmlFor="confirmPassword">
+                            Confirm Password <span className="required">*</span>
+                        </label>
+                        <input
+                            id="confirmPassword"
+                            type="password"
+                            placeholder="Confirm your password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                    </div>
+
+                    {/* Billing Information (Optional) */}
+                    <h3 className="section-title">Billing Information (Optional)</h3>
+
+                    {/* Billing Address */}
+                    <div className="form-group">
+                        <label htmlFor="billingAddress">Billing Address</label>
+                        <input
+                            id="billingAddress"
+                            type="text"
+                            placeholder="Enter your billing address"
+                            value={billingAddress}
+                            onChange={(e) => setBillingAddress(e.target.value)}
+                        />
+                    </div>
+
+                    {/* City */}
+                    <div className="form-group">
+                        <label htmlFor="city">City</label>
+                        <input
+                            id="city"
+                            type="text"
+                            placeholder="Enter your city"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                        />
+                    </div>
+
+                    {/* Postal Code */}
+                    <div className="form-group">
+                        <label htmlFor="postalCode">Postal Code</label>
+                        <input
+                            id="postalCode"
+                            type="text"
+                            placeholder="Enter your postal code"
+                            value={postalCode}
+                            onChange={(e) => setPostalCode(e.target.value)}
+                        />
+                    </div>
+
+                    {/* Country */}
+                    <div className="form-group">
+                        <label htmlFor="country">Country</label>
+                        <input
+                            id="country"
+                            type="text"
+                            placeholder="Enter your country"
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
+                        />
+                    </div>
+
+                    {/* Credit Card Information */}
+                    <h3 className="section-title">Credit Card Information</h3>
+                    <div className="form-group">
+                        <label htmlFor="creditCardNumber">Credit Card Number</label>
+                        <input
+                            id="creditCardNumber"
+                            type="text"
+                            placeholder="Enter your credit card number"
+                            value={creditCardNumber}
+                            onChange={(e) => setCreditCardNumber(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="flex-row">
+                        {/* Expiry Date */}
+                        <div className="form-group half-width">
+                            <label htmlFor="expiryDate">Expiry Date</label>
                             <input
-                                id="name"
+                                id="expiryDate"
                                 type="text"
-                                placeholder="Enter your name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                placeholder="MM/YY"
+                                value={expiryDate}
+                                onChange={(e) => setExpiryDate(e.target.value)}
                             />
                         </div>
 
-                        {/* Email (Required) */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="email">
-                                Email <span className="text-red-500">*</span>
-                            </label>
+                        {/* CVV */}
+                        <div className="form-group half-width">
+                            <label htmlFor="cvv">CVV</label>
                             <input
-                                id="email"
-                                type="email"
-                                placeholder="Enter your email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-
-                        {/* Password (Required) */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="password">
-                                Password <span className="text-red-500">*</span>
-                            </label>
-                            <input
-                                id="password"
-                                type="password"
-                                placeholder="Enter your password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-
-                        {/* Confirm Password (Required) */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="confirmPassword">
-                                Confirm Password <span className="text-red-500">*</span>
-                            </label>
-                            <input
-                                id="confirmPassword"
-                                type="password"
-                                placeholder="Confirm your password"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-
-                        {/* Billing Information (Optional) */}
-                        <h3 className="text-lg font-semibold mt-4">Billing Information (Optional)</h3>
-
-                        {/* Billing Address */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="billingAddress">
-                                Billing Address
-                            </label>
-                            <input
-                                id="billingAddress"
+                                id="cvv"
                                 type="text"
-                                placeholder="Enter your billing address"
-                                value={billingAddress}
-                                onChange={(e) => setBillingAddress(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                placeholder="CVV"
+                                value={cvv}
+                                onChange={(e) => setCvv(e.target.value)}
                             />
                         </div>
+                    </div>
 
-                        {/* City */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="city">
-                                City
-                            </label>
-                            <input
-                                id="city"
-                                type="text"
-                                placeholder="Enter your city"
-                                value={city}
-                                onChange={(e) => setCity(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-
-                        {/* Postal Code */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="postalCode">
-                                Postal Code
-                            </label>
-                            <input
-                                id="postalCode"
-                                type="text"
-                                placeholder="Enter your postal code"
-                                value={postalCode}
-                                onChange={(e) => setPostalCode(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-
-                        {/* Country */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="country">
-                                Country
-                            </label>
-                            <input
-                                id="country"
-                                type="text"
-                                placeholder="Enter your country"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-
-                        {/* Credit Card Information */}
-                        <h3 className="text-lg font-semibold mt-4">Credit Card Information</h3>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="creditCardNumber">
-                                Credit Card Number
-                            </label>
-                            <input
-                                id="creditCardNumber"
-                                type="text"
-                                placeholder="Enter your credit card number"
-                                value={creditCardNumber}
-                                onChange={(e) => setCreditCardNumber(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-
-                        <div className="flex space-x-4">
-                            {/* Expiry Date */}
-                            <div className="w-1/2">
-                                <label className="block text-sm font-medium text-gray-700" htmlFor="expiryDate">
-                                    Expiry Date
-                                </label>
-                                <input
-                                    id="expiryDate"
-                                    type="text"
-                                    placeholder="MM/YY"
-                                    value={expiryDate}
-                                    onChange={(e) => setExpiryDate(e.target.value)}
-                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                />
-                            </div>
-
-                            {/* CVV */}
-                            <div className="w-1/2">
-                                <label className="block text-sm font-medium text-gray-700" htmlFor="cvv">
-                                    CVV
-                                </label>
-                                <input
-                                    id="cvv"
-                                    type="text"
-                                    placeholder="CVV"
-                                    value={cvv}
-                                    onChange={(e) => setCvv(e.target.value)}
-                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Submit Button */}
-                        <div>
-                            <button
-                                type="submit"
-                                className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            >
-                                Register
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    {/* Submit Button */}
+                    <button type="submit" className="register-button">
+                        Register
+                    </button>
+                </form>
             </div>
         </div>
     );

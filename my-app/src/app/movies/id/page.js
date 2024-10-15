@@ -1,8 +1,13 @@
+// app/movies/[id]/page.js
+
+"use client";
+
 import { useRouter } from 'next/navigation';
+import './page.css';
 
 export default function MovieDetails() {
   const router = useRouter();
-  const id = router.query?.id; // Fetch the movie ID from the URL
+  const { id } = router.query; // Fetch the movie ID from the URL
 
   // Temporary movie data, replace this with actual API call
   const movieDetails = {
@@ -26,16 +31,14 @@ export default function MovieDetails() {
   if (!movie) return <p>Movie not found!</p>;
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4">{movie.title}</h1>
-      <img className="w-full max-w-md mb-4" src={movie.poster} alt={`${movie.title} Poster`} />
-      <p className="mb-4">{movie.description}</p>
+    <div className="movie-details-container">
+      <h1 className="movie-title">{movie.title}</h1>
+      <img className="movie-poster" src={movie.poster} alt={`${movie.title} Poster`} />
+      <p className="movie-description">{movie.description}</p>
 
       {/* Movie Trailer */}
-      <div className="mb-6">
+      <div className="trailer-container">
         <iframe
-          width="100%"
-          height="400px"
           src={movie.trailerUrl}
           title="Movie Trailer"
           frameBorder="0"
@@ -43,7 +46,7 @@ export default function MovieDetails() {
         ></iframe>
       </div>
 
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <button className="book-button">
         Book Now
       </button>
     </div>

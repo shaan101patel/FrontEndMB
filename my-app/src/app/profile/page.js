@@ -1,6 +1,9 @@
+// app/profile/page.js
+
 "use client";
 
 import React, { useState } from 'react';
+import './page.css';
 
 export default function EditProfile() {
     const [formData, setFormData] = useState({
@@ -46,18 +49,18 @@ export default function EditProfile() {
     };
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4 text-black">
-            <div className="w-full max-w-4xl bg-white shadow-lg rounded p-6">
-                <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
+        <div className="edit-profile-container">
+            <div className="edit-profile-card">
+                <h2 className="edit-profile-title">Edit Profile</h2>
                 <form onSubmit={handleSubmit}>
                     {/* User Information Section */}
-                    <div className="mb-6">
-                        <h3 className="text-xl font-semibold mb-4">User Information</h3>
+                    <div className="section">
+                        <h3 className="section-title">User Information</h3>
 
                         {/* Name (Required) */}
-                        <div className="mb-4">
-                            <label htmlFor="name" className="block text-lg font-medium mb-2">
-                                Name <span className="text-red-500">*</span>
+                        <div className="form-group">
+                            <label htmlFor="name">
+                                Name <span className="required">*</span>
                             </label>
                             <input
                                 type="text"
@@ -65,15 +68,14 @@ export default function EditProfile() {
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                className="w-full border rounded p-2"
                                 required
                             />
                         </div>
 
                         {/* Email (Required) */}
-                        <div className="mb-4">
-                            <label htmlFor="email" className="block text-lg font-medium mb-2">
-                                Email <span className="text-red-500">*</span>
+                        <div className="form-group">
+                            <label htmlFor="email">
+                                Email <span className="required">*</span>
                             </label>
                             <input
                                 type="email"
@@ -81,15 +83,14 @@ export default function EditProfile() {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-full border rounded p-2"
                                 required
                             />
                         </div>
 
                         {/* Password (Required) */}
-                        <div className="mb-4">
-                            <label htmlFor="password" className="block text-lg font-medium mb-2">
-                                Password <span className="text-red-500">*</span>
+                        <div className="form-group">
+                            <label htmlFor="password">
+                                Password <span className="required">*</span>
                             </label>
                             <input
                                 type="password"
@@ -97,15 +98,14 @@ export default function EditProfile() {
                                 name="password"
                                 value={formData.password}
                                 onChange={handleChange}
-                                className="w-full border rounded p-2"
                                 required
                             />
                         </div>
 
                         {/* Confirm Password (Required) */}
-                        <div className="mb-4">
-                            <label htmlFor="confirmPassword" className="block text-lg font-medium mb-2">
-                                Confirm Password <span className="text-red-500">*</span>
+                        <div className="form-group">
+                            <label htmlFor="confirmPassword">
+                                Confirm Password <span className="required">*</span>
                             </label>
                             <input
                                 type="password"
@@ -113,125 +113,103 @@ export default function EditProfile() {
                                 name="confirmPassword"
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
-                                className="w-full border rounded p-2"
                                 required
                             />
                         </div>
                     </div>
 
                     {/* Billing Information Section */}
-                    <div className="mb-6">
-                        <h3 className="text-xl font-semibold mb-4">Billing Information</h3>
+                    <div className="section">
+                        <h3 className="section-title">Billing Information</h3>
 
-                        {/* Billing Address (Optional) */}
-                        <div className="mb-4">
-                            <label htmlFor="billingAddress" className="block text-lg font-medium mb-2">
-                                Billing Address
-                            </label>
+                        {/* Billing Address */}
+                        <div className="form-group">
+                            <label htmlFor="billingAddress">Billing Address</label>
                             <input
                                 type="text"
                                 id="billingAddress"
                                 name="billingAddress"
                                 value={formData.billingAddress}
                                 onChange={handleChange}
-                                className="w-full border rounded p-2"
                             />
                         </div>
 
-                        {/* City (Optional) */}
-                        <div className="mb-4">
-                            <label htmlFor="city" className="block text-lg font-medium mb-2">
-                                City
-                            </label>
+                        {/* City */}
+                        <div className="form-group">
+                            <label htmlFor="city">City</label>
                             <input
                                 type="text"
                                 id="city"
                                 name="city"
                                 value={formData.city}
                                 onChange={handleChange}
-                                className="w-full border rounded p-2"
                             />
                         </div>
 
-                        {/* Postal Code (Optional) */}
-                        <div className="mb-4">
-                            <label htmlFor="postalCode" className="block text-lg font-medium mb-2">
-                                Postal Code
-                            </label>
+                        {/* Postal Code */}
+                        <div className="form-group">
+                            <label htmlFor="postalCode">Postal Code</label>
                             <input
                                 type="text"
                                 id="postalCode"
                                 name="postalCode"
                                 value={formData.postalCode}
                                 onChange={handleChange}
-                                className="w-full border rounded p-2"
                             />
                         </div>
 
-                        {/* Country (Optional) */}
-                        <div className="mb-4">
-                            <label htmlFor="country" className="block text-lg font-medium mb-2">
-                                Country
-                            </label>
+                        {/* Country */}
+                        <div className="form-group">
+                            <label htmlFor="country">Country</label>
                             <input
                                 type="text"
                                 id="country"
                                 name="country"
                                 value={formData.country}
                                 onChange={handleChange}
-                                className="w-full border rounded p-2"
                             />
                         </div>
                     </div>
 
                     {/* Credit Card Information Section */}
-                    <div className="mb-6">
-                        <h3 className="text-xl font-semibold mb-4">Credit Card Information</h3>
+                    <div className="section">
+                        <h3 className="section-title">Credit Card Information</h3>
 
-                        {/* Credit Card Number (Optional) */}
-                        <div className="mb-4">
-                            <label htmlFor="creditCardNumber" className="block text-lg font-medium mb-2">
-                                Credit Card Number
-                            </label>
+                        {/* Credit Card Number */}
+                        <div className="form-group">
+                            <label htmlFor="creditCardNumber">Credit Card Number</label>
                             <input
                                 type="text"
                                 id="creditCardNumber"
                                 name="creditCardNumber"
                                 value={formData.creditCardNumber}
                                 onChange={handleChange}
-                                className="w-full border rounded p-2"
                             />
                         </div>
 
-                        <div className="flex space-x-4">
-                            {/* Expiry Date (Optional) */}
-                            <div className="mb-4 w-1/2">
-                                <label htmlFor="expiryDate" className="block text-lg font-medium mb-2">
-                                    Expiry Date
-                                </label>
+                        <div className="flex-row">
+                            {/* Expiry Date */}
+                            <div className="form-group half-width">
+                                <label htmlFor="expiryDate">Expiry Date</label>
                                 <input
                                     type="text"
                                     id="expiryDate"
                                     name="expiryDate"
                                     value={formData.expiryDate}
                                     onChange={handleChange}
-                                    className="w-full border rounded p-2"
                                     placeholder="MM/YY"
                                 />
                             </div>
 
-                            {/* CVV (Optional) */}
-                            <div className="mb-4 w-1/2">
-                                <label htmlFor="cvv" className="block text-lg font-medium mb-2">
-                                    CVV
-                                </label>
+                            {/* CVV */}
+                            <div className="form-group half-width">
+                                <label htmlFor="cvv">CVV</label>
                                 <input
                                     type="text"
                                     id="cvv"
                                     name="cvv"
                                     value={formData.cvv}
                                     onChange={handleChange}
-                                    className="w-full border rounded p-2"
                                 />
                             </div>
                         </div>
@@ -240,19 +218,15 @@ export default function EditProfile() {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full"
+                        className="update-button"
                     >
                         Update Profile
                     </button>
 
-                    {error && <p className="text-red-500 mt-4">{error}</p>}
-                    {success && <p className="text-green-500 mt-4">{success}</p>}
+                    {error && <p className="error-message">{error}</p>}
+                    {success && <p className="success-message">{success}</p>}
                 </form>
             </div>
         </div>
     );
 }
-
-
-
-
