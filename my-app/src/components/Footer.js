@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-gray-800 py-4">
       <div className="container mx-auto text-center text-white">
         <div className="mb-4">
-          <Link href="/home" className="hover:underline mx-2">
+          <Link href="/" className="hover:underline mx-2">
             Home
           </Link>
           <Link href="/about" className="hover:underline mx-2">
