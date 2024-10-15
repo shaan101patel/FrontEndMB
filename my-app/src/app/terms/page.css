@@ -1,0 +1,29 @@
+/* app/terms/page.css */
+
+.terms-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.terms-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.terms-subtitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.terms-text {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
