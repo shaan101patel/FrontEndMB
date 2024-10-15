@@ -11,11 +11,12 @@ const Confirmation = () => {
             <div className="confirmation-card">
                 <h2 className="confirmation-title">Registration Successful!</h2>
                 <p className="confirmation-text">
-                    Thank you for registering! You can now log in and start booking a movie.
+                    Thank you for registering! You can now explore and start booking a movie.
                 </p>
                 <div className="confirmation-button-container">
-                    <a href="/login" className="confirmation-button">
-                        Go to Login
+                    {/* Updated button text and link to go to the homepage */}
+                    <a href="/" className="confirmation-button">
+                        Go to Home
                     </a>
                 </div>
             </div>
@@ -24,3 +25,4 @@ const Confirmation = () => {
 };
 
 export default Confirmation;
+

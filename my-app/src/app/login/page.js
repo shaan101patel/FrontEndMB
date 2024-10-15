@@ -1,9 +1,6 @@
-// app/login/page.js
-
-"use client";
+"use client"; // This marks the file as a Client Component
 
 import React, { useState } from 'react';
-import './page.css'; // Import the CSS file
 
 const Login = () => {
   // State to manage form input values
@@ -35,51 +32,62 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <form onSubmit={handleSubmit}>
-          <h2 className="login-title">Login</h2>
+      <div className="flex justify-center items-center h-screen bg-gray-100">
+        <div className="w-full max-w-xs">
+          <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h2 className="text-center text-xl font-bold mb-4">Login</h2>
 
-          {error && <p className="login-error">{error}</p>}
+            {error && <p className="text-red-500 text-xs italic">{error}</p>}
 
-          {/* Email Input */}
-          <div className="form-group">
-            <label htmlFor="email">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+            {/* Email Input */}
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                Email
+              </label>
+              <input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
 
-          {/* Password Input */}
-          <div className="form-group">
-            <label htmlFor="password">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+            {/* Password Input */}
+            <div className="mb-6">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                Password
+              </label>
+              <input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              <a href="#" className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+                Forgot Password?
+              </a>
+            </div>
 
-          {/* Submit Button */}
-          <div className="form-actions">
-            <button type="submit" className="login-button">
-              Login
-            </button>
-          </div>
-        </form>
+            {/* Submit Button */}
+            <div className="flex items-center justify-between">
+              <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
   );
 };
 
 export default Login;
+
+
+
