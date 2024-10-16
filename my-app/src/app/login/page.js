@@ -1,6 +1,7 @@
 "use client"; // This marks the file as a Client Component
 
 import React, { useState } from 'react';
+import Link from 'next/link'; // Import Link for navigation
 
 const Login = () => {
   // State to manage form input values
@@ -35,7 +36,7 @@ const Login = () => {
       <div className="flex justify-center items-center h-screen bg-gray-100">
         <div className="w-full max-w-xs">
           <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <h2 className="text-center text-xl font-bold mb-4">Login</h2>
+            <h2 className="text-center text-xl font-bold mb-4 text-black">Login</h2> {/* Changed text color to black */}
 
             {error && <p className="text-red-500 text-xs italic">{error}</p>}
 
@@ -82,12 +83,23 @@ const Login = () => {
               </button>
             </div>
           </form>
+
+          {/* Sign Up Link */}
+          <p className="text-center text-gray-600 text-sm mt-4">
+            Don't have an account?{' '}
+            <Link href="/signup" className="text-blue-500 hover:text-blue-800 font-bold">
+              Sign Up
+            </Link>
+          </p>
         </div>
       </div>
   );
 };
 
 export default Login;
+
+
+
 
 
 
