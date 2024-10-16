@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { registerUser } from '../movieService';
 
 const Registration = () => {
     const router = useRouter();
@@ -10,7 +11,8 @@ const Registration = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const [promotionOptIn, setPromotionOptIn] = useState(false); // State to track promotion opt-in
+    const [success, setSuccess] = useState(''); // State to track success message
+    const [promotionOptIn, setPromotionOptIn] = useState(false);
 
     // Optional billing fields
     const [billingAddress, setBillingAddress] = useState('');
@@ -21,7 +23,7 @@ const Registration = () => {
     const [expiryDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!name || !email || !password || !confirmPassword) {
@@ -36,11 +38,24 @@ const Registration = () => {
 
         setError('');
 
-        // Mock successful registration logic
-        console.log('Registering with:', { name, email, password, billingAddress, creditCardNumber, promotionOptIn });
+        // Prepare user data for registration
+        const userData = {
+            name,
+            email,
+            password,
+            billingAddress,
+            creditCardNumber,
+            promotionOptIn,
+        };
 
-        // Redirect to confirmation page after successful registration
-        router.push('/confirmation');
+        try {
+            await registerUser(userData);
+            setSuccess('Registration successful!'); // Set success message
+            router.push('/confirmation'); // Redirect to confirmation page
+        } catch (error) {
+            setError('Registration failed. Please try again.'); // Set error message
+            console.error("Registration error:", error);
+        }
     };
 
     return (
@@ -51,8 +66,8 @@ const Registration = () => {
                         <h2 className="text-center text-2xl font-extrabold text-gray-900">Register</h2>
 
                         {error && <p className="text-red-500 text-xs italic">{error}</p>}
+                        {success && <p className="text-green-500 text-xs italic">{success}</p>}
 
-                        {/* Name (Required) */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700" htmlFor="name">
                                 Name <span className="text-red-500">*</span>
@@ -68,7 +83,6 @@ const Registration = () => {
                             />
                         </div>
 
-                        {/* Email (Required) */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700" htmlFor="email">
                                 Email <span className="text-red-500">*</span>
@@ -84,7 +98,6 @@ const Registration = () => {
                             />
                         </div>
 
-                        {/* Password (Required) */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700" htmlFor="password">
                                 Password <span className="text-red-500">*</span>
@@ -100,7 +113,6 @@ const Registration = () => {
                             />
                         </div>
 
-                        {/* Confirm Password (Required) */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700" htmlFor="confirmPassword">
                                 Confirm Password <span className="text-red-500">*</span>
@@ -116,10 +128,8 @@ const Registration = () => {
                             />
                         </div>
 
-                        {/* Billing Information (Optional) */}
                         <h3 className="text-lg font-semibold mt-4">Billing Information (Optional)</h3>
 
-                        {/* Billing Address */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700" htmlFor="billingAddress">
                                 Billing Address
@@ -134,7 +144,6 @@ const Registration = () => {
                             />
                         </div>
 
-                        {/* City */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700" htmlFor="city">
                                 City
@@ -149,7 +158,6 @@ const Registration = () => {
                             />
                         </div>
 
-                        {/* Postal Code */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700" htmlFor="postalCode">
                                 Postal Code
@@ -164,7 +172,6 @@ const Registration = () => {
                             />
                         </div>
 
-                        {/* Country */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700" htmlFor="country">
                                 Country
@@ -179,7 +186,6 @@ const Registration = () => {
                             />
                         </div>
 
-                        {/* Promotion Opt-In */}
                         <div className="mt-4">
                             <label className="inline-flex items-center">
                                 <input
@@ -192,7 +198,6 @@ const Registration = () => {
                             </label>
                         </div>
 
-                        {/* Credit Card Information */}
                         <h3 className="text-lg font-semibold mt-4">Credit Card Information</h3>
                         <div>
                             <label className="block text-sm font-medium text-gray-700" htmlFor="creditCardNumber">
@@ -209,7 +214,6 @@ const Registration = () => {
                         </div>
 
                         <div className="flex space-x-4">
-                            {/* Expiry Date */}
                             <div className="w-1/2">
                                 <label className="block text-sm font-medium text-gray-700" htmlFor="expiryDate">
                                     Expiry Date
@@ -223,8 +227,6 @@ const Registration = () => {
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
                             </div>
-
-                            {/* CVV */}
                             <div className="w-1/2">
                                 <label className="block text-sm font-medium text-gray-700" htmlFor="cvv">
                                     CVV
@@ -232,7 +234,7 @@ const Registration = () => {
                                 <input
                                     id="cvv"
                                     type="text"
-                                    placeholder="Enter CVV"
+                                    placeholder="CVV"
                                     value={cvv}
                                     onChange={(e) => setCvv(e.target.value)}
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -240,11 +242,10 @@ const Registration = () => {
                             </div>
                         </div>
 
-                        {/* Submit Button */}
                         <div>
                             <button
                                 type="submit"
-                                className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150"
+                                className="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                             >
                                 Register
                             </button>
@@ -257,4 +258,3 @@ const Registration = () => {
 };
 
 export default Registration;
-
