@@ -58,7 +58,7 @@ const TermsOfService = () => {
 
             <h2 className="terms-subtitle">8. Contact Us</h2>
             <p className="terms-text">
-                If you have any questions about these Terms, please contact us at support@cinemaebooking.com.
+                If you have any questions about these Terms, please contact us at cinemabookingsystem.info@gmail.com.
             </p>
         </div>
     );

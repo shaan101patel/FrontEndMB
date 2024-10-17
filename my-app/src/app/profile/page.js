@@ -1,5 +1,3 @@
-// app/profile/page.js
-
 "use client";
 
 import React, { useState } from 'react';
@@ -53,11 +51,9 @@ export default function EditProfile() {
             <div className="edit-profile-card">
                 <h2 className="edit-profile-title">Edit Profile</h2>
                 <form onSubmit={handleSubmit}>
-                    {/* User Information Section */}
                     <div className="section">
                         <h3 className="section-title">User Information</h3>
 
-                        {/* Name (Required) */}
                         <div className="form-group">
                             <label htmlFor="name">
                                 Name <span className="required">*</span>
@@ -72,7 +68,6 @@ export default function EditProfile() {
                             />
                         </div>
 
-                        {/* Email (Required) */}
                         <div className="form-group">
                             <label htmlFor="email">
                                 Email <span className="required">*</span>
@@ -87,7 +82,6 @@ export default function EditProfile() {
                             />
                         </div>
 
-                        {/* Password (Required) */}
                         <div className="form-group">
                             <label htmlFor="password">
                                 Password <span className="required">*</span>
@@ -102,7 +96,6 @@ export default function EditProfile() {
                             />
                         </div>
 
-                        {/* Confirm Password (Required) */}
                         <div className="form-group">
                             <label htmlFor="confirmPassword">
                                 Confirm Password <span className="required">*</span>
@@ -118,11 +111,9 @@ export default function EditProfile() {
                         </div>
                     </div>
 
-                    {/* Billing Information Section */}
                     <div className="section">
                         <h3 className="section-title">Billing Information</h3>
 
-                        {/* Billing Address */}
                         <div className="form-group">
                             <label htmlFor="billingAddress">Billing Address</label>
                             <input
@@ -134,7 +125,6 @@ export default function EditProfile() {
                             />
                         </div>
 
-                        {/* City */}
                         <div className="form-group">
                             <label htmlFor="city">City</label>
                             <input
@@ -146,7 +136,6 @@ export default function EditProfile() {
                             />
                         </div>
 
-                        {/* Postal Code */}
                         <div className="form-group">
                             <label htmlFor="postalCode">Postal Code</label>
                             <input
@@ -158,7 +147,6 @@ export default function EditProfile() {
                             />
                         </div>
 
-                        {/* Country */}
                         <div className="form-group">
                             <label htmlFor="country">Country</label>
                             <input
@@ -171,11 +159,9 @@ export default function EditProfile() {
                         </div>
                     </div>
 
-                    {/* Credit Card Information Section */}
                     <div className="section">
                         <h3 className="section-title">Credit Card Information</h3>
 
-                        {/* Credit Card Number */}
                         <div className="form-group">
                             <label htmlFor="creditCardNumber">Credit Card Number</label>
                             <input
@@ -188,7 +174,6 @@ export default function EditProfile() {
                         </div>
 
                         <div className="flex-row">
-                            {/* Expiry Date */}
                             <div className="form-group half-width">
                                 <label htmlFor="expiryDate">Expiry Date</label>
                                 <input
@@ -201,7 +186,6 @@ export default function EditProfile() {
                                 />
                             </div>
 
-                            {/* CVV */}
                             <div className="form-group half-width">
                                 <label htmlFor="cvv">CVV</label>
                                 <input
@@ -215,7 +199,6 @@ export default function EditProfile() {
                         </div>
                     </div>
 
-                    {/* Submit Button */}
                     <button
                         type="submit"
                         className="update-button"
@@ -230,3 +213,5 @@ export default function EditProfile() {
         </div>
     );
 }
+
+

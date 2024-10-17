@@ -58,7 +58,7 @@ const PrivacyPolicy = () => {
 
             <h2 className="privacy-subtitle">8. Contact Us</h2>
             <p className="privacy-text">
-                For any questions regarding this Privacy Policy, please contact us at privacy@cinemaebooking.com.
+                For any questions regarding this Privacy Policy, please contact us at cinemabookingsystem.info@gmail.com.
             </p>
         </div>
     );
