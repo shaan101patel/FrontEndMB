@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { useState } from 'react';
 
 // Base API URLs
 const GET_MOVIES_URL = 'http://localhost:9090/get-movies'; // For getting all movies
 const SEARCH_MOVIES_URL = 'http://localhost:9090/api/movies'; // For searching movies
 const REGISTER_URL = 'http://localhost:9090/register'; // For registering users
+const VERIFY_EMAIL_URL = 'http://localhost:9090/Success'; // For verifying emails
 
 // Function to fetch all movies
 export const fetchMovies = async () => {
@@ -28,4 +28,16 @@ export const registerUser = async (userData) => {
         throw error;
     }
 };
+
+// Function to verify user email
+export const verifyEmail = async (token) => {
+    try {
+        const response = await axios.get(`${VERIFY_EMAIL_URL}?token=${token}`);
+        return response;
+    } catch (error) {
+        console.error("Email verification failed:", error);
+        throw error;
+    }
+};
+
 
