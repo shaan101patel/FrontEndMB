@@ -2,88 +2,55 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation'; // Import useRouter for navigation
-import Link from 'next/link';
 
-const ForgotPassword = () => {
+const ForgotPasswordRequest = () => {
     const router = useRouter(); // Initialize the router
-
-    // State to manage new password and confirmation
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-
-    // State to handle form submission and errors
+    const [email, setEmail] = useState('');
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState(false); // State for success message
+    const [success, setSuccess] = useState(false);
 
-    // Function to handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Basic validation
-        if (!newPassword || !confirmPassword) {
-            setError('Please fill out both fields.');
+        if (!email) {
+            setError('Please enter your email.');
             return;
         }
 
-        if (newPassword !== confirmPassword) {
-            setError('Passwords do not match.');
-            return;
-        }
-
-        // Clear error if any
         setError('');
 
-        // Simulate password change logic
-        console.log('Changing password to:', newPassword);
+        try {
+            // Replace with your API call to send the reset password email
+            await sendResetPasswordEmail(email);
 
-        // Simulate a successful password change
-        setTimeout(() => {
-            setSuccess(true);
-            // Optionally redirect after success
-            // router.push('/login'); // Redirect to the login page or desired route
-        }, 1000);
-
-        // Reset form (optional)
-        setNewPassword('');
-        setConfirmPassword('');
+            setSuccess('Check your email for a link to reset your password!');
+            setEmail('');
+        } catch (error) {
+            setError('Failed to send reset link. Please try again.');
+        }
     };
 
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
             <div className="w-full max-w-xs">
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <h2 className="text-center text-xl font-bold mb-4 text-black">Reset Password</h2>
+                    <h2 className="text-center text-xl font-bold mb-4 text-black">Forgot Password</h2>
 
                     {error && <p className="text-red-500 text-xs italic">{error}</p>}
-                    {success && <p className="text-green-500 text-xs italic">Password changed successfully!</p>}
+                    {success && <p className="text-green-500 text-xs italic">{success}</p>}
 
-                    {/* New Password Input */}
+                    {/* Email Input */}
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="new-password">
-                            New Password
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                            Email
                         </label>
                         <input
-                            id="new-password"
-                            type="password"
-                            placeholder="Enter new password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
+                            id="email"
+                            type="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        />
-                    </div>
-
-                    {/* Confirm Password Input */}
-                    <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirm-password">
-                            Confirm Password
-                        </label>
-                        <input
-                            id="confirm-password"
-                            type="password"
-                            placeholder="Confirm new password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
 
@@ -93,24 +60,18 @@ const ForgotPassword = () => {
                             type="submit"
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         >
-                            Change Password
+                            Send Reset Link
                         </button>
                     </div>
                 </form>
-
-                {/* Back to Login Link */}
-                <p className="text-center text-gray-600 text-sm mt-4">
-                    Remembered your password?{' '}
-                    <Link href="/login" className="text-blue-500 hover:text-blue-800 font-bold">
-                        Log In
-                    </Link>
-                </p>
             </div>
         </div>
     );
 };
 
-export default ForgotPassword;
+
+export default ForgotPasswordRequest;
+
 
 
 
