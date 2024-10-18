@@ -1,0 +1,92 @@
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body Style */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light background for contrast */
+    min-height: 100vh; /* Ensure the body takes the full viewport height */
+    display: flex;
+    flex-direction: column; /* Vertical layout */
+}
+
+/* Header and Footer styles */
+header, footer {
+    height: 60px; /* Fixed height for header and footer */
+    background-color: #333; /* Dark background for header and footer */
+    color: #ffffff; /* White text color */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    width: 100%; /* Full width */
+}
+
+/* Main content area style */
+.main-content {
+    flex: 1; /* Take remaining space between header and footer */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: calc(100vh - 120px); /* Full height minus header and footer */
+}
+
+/* Container for the success message */
+.success-container {
+    background-color: #ffffff; /* White background for the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 40px; /* Increased padding for a more spacious layout */
+    text-align: center; /* Centered text */
+    width: 400px; /* Fixed width for the box */
+    margin: 20px; /* Margin around the box */
+}
+
+/* Success heading style */
+.success-heading {
+    font-size: 24px; /* Larger text for the heading */
+    color: #007BFF; /* Blue color for success heading */
+    margin-bottom: 20px; /* Space between heading and message */
+}
+
+
+/* Success message text style */
+.success-message {
+    font-size: 18px; /* Larger text for the message */
+    color: #555; /* Neutral dark gray for the message */
+    margin-bottom: 20px; /* Space between message and button */
+}
+
+/* Button style */
+.return-button {
+    background-color: #007BFF; /* Blue background for the button */
+    color: #ffffff; /* White text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded button corners */
+    padding: 10px 20px; /* Padding for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Button hover effect */
+.return-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

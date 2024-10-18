@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { registerUser } from '../movieService';
+import './page.css';
 
 const Registration = () => {
     const router = useRouter();
