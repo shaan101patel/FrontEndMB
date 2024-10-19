@@ -75,3 +75,27 @@
     color: red;
     margin-bottom: 10px;
 }
+
+.signup-option {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.signup-option p {
+    font-size: 14px;
+    margin: 0;
+    color: #333;
+}
+
+.signup-option strong {
+    font-weight: bold;
+}
+
+.signup-option .link {
+    color: #0070f3;
+    text-decoration: none;
+}
+
+.signup-option .link:hover {
+    text-decoration: underline;
+}

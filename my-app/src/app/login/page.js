@@ -529,13 +529,16 @@ const Login = () => {
                     Remember Me
                 </label>
                 <button className="login-button" onClick={handleLogin}>Login</button>
-                <Link className="link" href="/forgot-password">Forgot Password?</Link>
+
+                <Link className="link" href="/ForgotPassword">Forgot Password?</Link>
+
+                {/* New Sign-Up Option */}
+                <div className="signup-option">
+                    <p><strong>Don't have an account?</strong> <Link href="/signup" className="link">Sign up</Link></p>
+                </div>
             </div>
         </div>
     );
 };
 
 export default Login;
-
-
-
