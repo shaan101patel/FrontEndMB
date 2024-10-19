@@ -6,7 +6,7 @@ const GET_MOVIES_URL = 'http://localhost:9090/get-movies'; // For getting all mo
 const SEARCH_MOVIES_URL = 'http://localhost:9090/api/movies'; // For searching movies
 const REGISTER_URL = 'http://localhost:9090/register'; // For registering users
 const VERIFY_EMAIL_URL = 'http://localhost:9090/Success'; // For verifying emails
-//const LOGIN_URL = 'http://localhost:9090/api/login'; // Add the login URL
+const LOGIN_URL = 'http://localhost:9090/login'; // Add the login URL
 
 
 // Function to fetch all movies
@@ -43,15 +43,18 @@ export const verifyEmail = async (token) => {
     }
 };
 
-/*
+
 // Function to handle login
 export const loginUser = async (email, password) => {
     try {
+        console.log('Before API Call:', email, password);
         const response = await axios.post(LOGIN_URL, { email, password });
+        console.log("Response Data in movieService:", response.data);
+
         return response.data; // Assuming the backend returns a token or user info
     } catch (error) {
         console.error("Login failed:", error);
         throw error;
     }
 };
-*/
+
