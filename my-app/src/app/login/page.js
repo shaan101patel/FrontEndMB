@@ -364,6 +364,8 @@ const Login = () => {
 };
 
 export default Login;*/
+
+/*
 "use client"; // This marks the file as a Client Component
 
 import React, { useState } from 'react';
@@ -424,6 +426,108 @@ const Login = () => {
                     placeholder="Password"
                     className="input"
                 />
+                <button className="login-button" onClick={handleLogin}>Login</button>
+                <Link className="link" href="/forgot-password">Forgot Password?</Link>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
+*/
+
+"use client"; // This marks the file as a Client Component
+
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation'; // Importing router for navigation
+import { loginUser } from '../movieService'; // Import the loginUser function
+import Link from 'next/link';
+import './page.css'; // Import the CSS file
+
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false); // State for "Remember Me" checkbox
+    const [error, setError] = useState('');
+    const router = useRouter();
+
+    // On component mount, check if credentials are stored
+    useEffect(() => {
+        const savedEmail = localStorage.getItem('rememberMe') === 'true' ? localStorage.getItem('email') : '';
+        const savedPassword = localStorage.getItem('rememberMe') === 'true' ? localStorage.getItem('password') : '';
+        const savedRememberMe = localStorage.getItem('rememberMe') === 'true';
+
+        setEmail(savedEmail || '');
+        setPassword(savedPassword || '');
+        setRememberMe(savedRememberMe);
+    }, []);
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleLogin();
+        }
+    };
+
+    const handleLogin = async () => {
+        try {
+            const response = await loginUser(email, password);
+            console.log(response); // Log the response to see its value
+
+            if (response.role) { // Check if the response has a role
+                // If "Remember Me" is checked, store credentials
+                if (rememberMe) {
+                    localStorage.setItem('email', email);
+                    localStorage.setItem('password', password); // Store only if it's secure
+                    localStorage.setItem('rememberMe', 'true');
+                } else {
+                    // Clear stored credentials if "Remember Me" is not checked
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('password');
+                    localStorage.setItem('rememberMe', 'false');
+                }
+
+                localStorage.setItem("userRole", response.role); // Store role in localStorage
+
+                // Create and dispatch a custom event to signal that the user has logged in
+                window.dispatchEvent(new Event('login'));
+
+                router.push(response.role === 'user' ? '/' : '/admin'); // Redirect based on role
+            }
+        } catch (err) {
+            setError('Login Failed'); // Handle login error
+        }
+    };
+
+    return (
+        <div className="main-content">
+            <div className="login-card">
+                <h1 className="title">Login</h1>
+                {error && <p className="error">{error}</p>}
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Email"
+                    className="input"
+                />
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Password"
+                    className="input"
+                />
+                <label className="remember-me">
+                    <input
+                        type="checkbox"
+                        checked={rememberMe}
+                        onChange={() => setRememberMe(!rememberMe)}
+                    />
+                    Remember Me
+                </label>
                 <button className="login-button" onClick={handleLogin}>Login</button>
                 <Link className="link" href="/forgot-password">Forgot Password?</Link>
             </div>
