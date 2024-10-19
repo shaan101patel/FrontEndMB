@@ -74,6 +74,7 @@ const Header = () => {
 export default Header;
 */
 
+
 "use client"; // Ensure this is a Client Component
 
 import React, { useEffect, useState } from "react";

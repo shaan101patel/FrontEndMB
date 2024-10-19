@@ -135,12 +135,15 @@ const Login = () => {
 
 export default Login;*/
 
+/*
 "use client"; // This marks the file as a Client Component
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation'; // Importing router for navigation
 import { loginUser } from '../movieService'; // Import the loginUser function
 import Link from 'next/link';
+import './page.css'; // Import the CSS file
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -213,9 +216,81 @@ const Login = () => {
 };
 
 export default Login;
+*/
 
 
+"use client"; // This marks the file as a Client Component
 
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Importing router for navigation
+import { loginUser } from '../movieService'; // Import the loginUser function
+import Link from 'next/link';
+import './page.css'; // Import the CSS file
 
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
+    const router = useRouter();
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleLogin();
+        }
+    };
 
+    const handleLogin = async () => {
+        try {
+            const response = await loginUser(email, password);
+            console.log(response); // Log the response to see its value
+
+            if (response.role === 'user') {
+                router.push('/'); // Redirect to '/' if the role is user
+            } else {
+                router.push('/admin'); // Redirect to /admin on successful login if the role is not user
+            }
+
+        } catch (err) {
+            setError('Login Failed'); // Handle login error
+        }
+    };
+
+    return (
+        <div className="main-content">
+            <div className="login-card">
+                <h1 className="title">Login</h1>
+                {error && <p className="error">{error}</p>}
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Email"
+                    className="input"
+                />
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Password"
+                    className="input"
+                />
+                <label className="remember-me">
+                    <input
+                        type="checkbox"
+                        checked={rememberMe}
+                        onChange={() => setRememberMe(!rememberMe)}
+                    />
+                    Remember Me
+                </label>
+                <button className="login-button" onClick={handleLogin}>Login</button>
+                <Link className="link" href="/forgot-password">Forgot Password?</Link>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
