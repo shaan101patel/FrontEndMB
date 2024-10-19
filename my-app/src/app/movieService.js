@@ -6,9 +6,8 @@ const GET_MOVIES_URL = 'http://localhost:9090/get-movies'; // For getting all mo
 const SEARCH_MOVIES_URL = 'http://localhost:9090/api/movies'; // For searching movies
 const REGISTER_URL = 'http://localhost:9090/register'; // For registering users
 const VERIFY_EMAIL_URL = 'http://localhost:9090/Success'; // For verifying emails
-const LOGIN_URL = 'http://localhost:9090/login'; // Add the login URL
-
-
+const LOGIN_URL = 'http://localhost:9090/login'; // For login
+const USER_PROFILE_URL = 'http://localhost:9090/user-profile'; // For getting user profile
 
 // Function to fetch all movies
 export const fetchMovies = async () => {
@@ -33,8 +32,6 @@ export const registerUser = async (userData) => {
     }
 };
 
-
-
 // Function to verify user email
 export const verifyEmail = async (token) => {
     try {
@@ -46,7 +43,6 @@ export const verifyEmail = async (token) => {
     }
 };
 
-
 // Function to handle login
 export const loginUser = async (email, password) => {
     try {
@@ -54,17 +50,32 @@ export const loginUser = async (email, password) => {
         const response = await axios.post(LOGIN_URL, { email, password });
         console.log("Response Data in movieService:", response.data);
 
-        return response.data; // Assuming the backend returns a token or user info
-
-        const sessionStatus = await checkSession();
-        console.log('Session Status:', sessionStatus); // Should reflect the logged-in state
-
+        return response.data; // Assuming the backend returns user info
     } catch (error) {
         console.error("Login failed:", error);
         throw error;
     }
 };
 
+// Function to fetch user profile
+export const fetchUserProfile = async (email) => {
+    try {
+        const response = await axios.get(`${USER_PROFILE_URL}?email=${email}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
+        throw error;
+    }
+};
 
-
+// Add this function to movieService.js
+export const updateUserProfile = async (userData) => {
+    try {
+        const response = await axios.post('http://localhost:9090/update-profile', userData);
+        return response.data;
+    } catch (error) {
+        console.error("Update profile failed:", error);
+        throw error;
+    }
+};
 
