@@ -219,7 +219,7 @@ export default Login;
 */
 
 
-"use client"; // This marks the file as a Client Component
+/*"use client"; // This marks the file as a Client Component
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation'; // Importing router for navigation
@@ -232,6 +232,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const router = useRouter();
 
     const handleKeyDown = (event) => {
@@ -247,8 +248,10 @@ const Login = () => {
             console.log(response); // Log the response to see its value
 
             if (response.role === 'user') {
+                setIsLoggedIn(true);
                 router.push('/'); // Redirect to '/' if the role is user
             } else {
+                setIsLoggedIn(true);
                 router.push('/admin'); // Redirect to /admin on successful login if the role is not user
             }
 
@@ -293,4 +296,142 @@ const Login = () => {
     );
 };
 
+export default Login;*/
+
+
+//last shot
+/*"use client"; // This marks the file as a Client Component
+
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Importing router for navigation
+import { loginUser } from '../movieService'; // Import the loginUser function
+import Link from 'next/link';
+import './page.css'; // Import the CSS file
+
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const router = useRouter();
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleLogin();
+        }
+    };
+
+    const handleLogin = async () => {
+        try {
+            const response = await loginUser(email, password);
+            console.log(response); // Log the response to see its value
+
+            if (response.role) { // Check if the response has a role
+                localStorage.setItem("userRole", response.role); // Store role in localStorage
+                router.push(response.role === 'user' ? '/' : '/admin'); // Redirect based on role
+            }
+        } catch (err) {
+            setError('Login Failed'); // Handle login error
+        }
+    };
+
+    return (
+        <div className="main-content">
+            <div className="login-card">
+                <h1 className="title">Login</h1>
+                {error && <p className="error">{error}</p>}
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Email"
+                    className="input"
+                />
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Password"
+                    className="input"
+                />
+                <button className="login-button" onClick={handleLogin}>Login</button>
+                <Link className="link" href="/forgot-password">Forgot Password?</Link>
+            </div>
+        </div>
+    );
+};
+
+export default Login;*/
+"use client"; // This marks the file as a Client Component
+
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Importing router for navigation
+import { loginUser } from '../movieService'; // Import the loginUser function
+import Link from 'next/link';
+import './page.css'; // Import the CSS file
+
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const router = useRouter();
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleLogin();
+        }
+    };
+
+    const handleLogin = async () => {
+        try {
+            const response = await loginUser(email, password);
+            console.log(response); // Log the response to see its value
+
+            if (response.role) { // Check if the response has a role
+                localStorage.setItem("userRole", response.role); // Store role in localStorage
+
+                // Create and dispatch a custom event to signal that the user has logged in
+                window.dispatchEvent(new Event('login'));
+
+                router.push(response.role === 'user' ? '/' : '/admin'); // Redirect based on role
+            }
+        } catch (err) {
+            setError('Login Failed'); // Handle login error
+        }
+    };
+
+    return (
+        <div className="main-content">
+            <div className="login-card">
+                <h1 className="title">Login</h1>
+                {error && <p className="error">{error}</p>}
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Email"
+                    className="input"
+                />
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Password"
+                    className="input"
+                />
+                <button className="login-button" onClick={handleLogin}>Login</button>
+                <Link className="link" href="/forgot-password">Forgot Password?</Link>
+            </div>
+        </div>
+    );
+};
+
 export default Login;
+
+
+

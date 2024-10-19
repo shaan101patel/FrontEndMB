@@ -9,6 +9,7 @@ const VERIFY_EMAIL_URL = 'http://localhost:9090/Success'; // For verifying email
 const LOGIN_URL = 'http://localhost:9090/login'; // Add the login URL
 
 
+
 // Function to fetch all movies
 export const fetchMovies = async () => {
     const response = await axios.get(GET_MOVIES_URL);
@@ -32,6 +33,8 @@ export const registerUser = async (userData) => {
     }
 };
 
+
+
 // Function to verify user email
 export const verifyEmail = async (token) => {
     try {
@@ -52,9 +55,16 @@ export const loginUser = async (email, password) => {
         console.log("Response Data in movieService:", response.data);
 
         return response.data; // Assuming the backend returns a token or user info
+
+        const sessionStatus = await checkSession();
+        console.log('Session Status:', sessionStatus); // Should reflect the logged-in state
+
     } catch (error) {
         console.error("Login failed:", error);
         throw error;
     }
 };
+
+
+
 
