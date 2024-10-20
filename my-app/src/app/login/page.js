@@ -495,7 +495,7 @@ const Login = () => {
                 router.push(response.role === 'user' ? '/' : '/admin'); // Redirect based on role
             }
         } catch (err) {
-            setError('Login Failed'); // Handle login error
+            setError('Login Failed: ' + (err.response?.data?.message || 'Unknown error occurred'));
         }
     };
 

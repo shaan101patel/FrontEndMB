@@ -2,12 +2,13 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation'; // Import useRouter for navigation
+import { sendResetPasswordEmail } from '../movieService'; // Adjust the path to movieService
 
 const ForgotPasswordRequest = () => {
     const router = useRouter(); // Initialize the router
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,7 +21,7 @@ const ForgotPasswordRequest = () => {
         setError('');
 
         try {
-            // Replace with your API call to send the reset password email
+            // Call the API to send the reset password email
             await sendResetPasswordEmail(email);
 
             setSuccess('Check your email for a link to reset your password!');
@@ -69,9 +70,4 @@ const ForgotPasswordRequest = () => {
     );
 };
 
-
 export default ForgotPasswordRequest;
-
-
-
-

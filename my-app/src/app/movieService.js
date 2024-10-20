@@ -68,6 +68,18 @@ export const fetchUserProfile = async (email) => {
     }
 };
 
+// Function to handle forgot password
+export const sendResetPasswordEmail = async (email) => {
+    try {
+        const response = await axios.post('http://localhost:9090/forgot-password', { email });
+        return response.data;
+    } catch (error) {
+        console.error("Failed to send reset password email:", error);
+        throw error;
+    }
+};
+
+
 // Add this function to movieService.js
 export const updateUserProfile = async (userData) => {
     try {
@@ -78,4 +90,18 @@ export const updateUserProfile = async (userData) => {
         throw error;
     }
 };
+
+export const resetPassword = async (email, newPassword) => {
+    try {
+        const response = await axios.post('http://localhost:9090/reset-password', {
+            email, // User's email
+            password: newPassword // The new password to be updated
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Failed to reset password:", error);
+        throw error; // Rethrow the error to handle it in the frontend
+    }
+};
+
 

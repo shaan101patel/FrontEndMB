@@ -1,28 +1,27 @@
 "use client"; // This marks the file as a Client Component
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation'; // Import useRouter for navigation
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Removed useSearchParams since we don't need it anymore
+import { resetPassword } from '../movieService'; // Import resetPassword function from movieService
 
 const ResetPassword = () => {
-    const router = useRouter(); // Initialize the router
-    const [token, setToken] = useState(null); // State for the token
+    const router = useRouter();
+    const [email, setEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState(false); // State for success message
-
-    useEffect(() => {
-        // Only access router.query if it's defined
-        if (router.query && router.query.token) {
-            setToken(router.query.token); // Set the token state if available
-        }
-    }, [router.query]); // Run this effect whenever router.query changes
+    const [success, setSuccess] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!email) {
+            setError('Email is required.');
+            return;
+        }
+
         if (!newPassword || !confirmPassword) {
-            setError('Please fill out both fields.');
+            setError('Please fill out all fields.');
             return;
         }
 
@@ -34,17 +33,27 @@ const ResetPassword = () => {
         setError('');
 
         try {
-            // Call your API to reset the password
-            await resetPassword(token, newPassword); // Send token and new password
+            // Call the resetPassword API with the email and new password
+            await resetPassword(email, newPassword);
 
             setSuccess('Password changed successfully!');
+            setEmail('');
             setNewPassword('');
             setConfirmPassword('');
 
             // Redirect to the login page after successful password reset
-            router.push('/login'); // Redirect to the login page
+            setTimeout(() => {
+                router.push('/login'); // Delayed navigation to give user feedback
+            }, 1500);
         } catch (error) {
-            setError('Failed to change password. Please try again.');
+            console.log(error); // Log the error to see what exactly is happening
+
+            // Display a more specific error message based on the error response
+            if (error.response && error.response.data) {
+                setError(`Failed to change password: ${error.response.data.message || 'Please try again.'}`);
+            } else {
+                setError('Failed to change password. Please try again later.');
+            }
         }
     };
 
@@ -56,6 +65,22 @@ const ResetPassword = () => {
 
                     {error && <p className="text-red-500 text-xs italic">{error}</p>}
                     {success && <p className="text-green-500 text-xs italic">{success}</p>}
+
+                    {/* Email Input */}
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                            Email
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        />
+                    </div>
 
                     {/* New Password Input */}
                     <div className="mb-4">
@@ -69,6 +94,7 @@ const ResetPassword = () => {
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
                         />
                     </div>
 
@@ -84,6 +110,7 @@ const ResetPassword = () => {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            required
                         />
                     </div>
 
@@ -93,7 +120,7 @@ const ResetPassword = () => {
                             type="submit"
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         >
-                            Change Password and Return to Login
+                            Change Password
                         </button>
                     </div>
                 </form>
@@ -102,8 +129,5 @@ const ResetPassword = () => {
     );
 };
 
-
-
 export default ResetPassword;
-
 
