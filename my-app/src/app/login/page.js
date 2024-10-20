@@ -534,7 +534,7 @@ const Login = () => {
 
                 {/* New Sign-Up Option */}
                 <div className="signup-option">
-                    <p><strong>Don't have an account?</strong> <Link href="/signup" className="link">Sign up</Link></p>
+                    <p><strong>Don't have an account?</strong> <Link href="/register" className="link">Sign up</Link></p>
                 </div>
             </div>
         </div>
