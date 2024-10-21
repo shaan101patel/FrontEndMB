@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from 'react';
@@ -13,17 +12,27 @@ const Registration = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState(''); // State to track success message
-    const [promotionOptIn, setPromotionOptIn] = useState(false);
-
-    // Optional billing fields
+    const [success, setSuccess] = useState('');
     const [billingAddress, setBillingAddress] = useState('');
     const [city, setCity] = useState('');
     const [postalCode, setPostalCode] = useState('');
     const [country, setCountry] = useState('');
-    const [creditCardNumber, setCreditCardNumber] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
-    const [cvv, setCvv] = useState('');
+
+    // State for credit cards
+    const [creditCards, setCreditCards] = useState([{ number: '', expiry: '', cvv: '' }]);
+    const [promotionOptIn, setPromotionOptIn] = useState(false);
+
+    const handleCreditCardChange = (index, field, value) => {
+        const newCards = [...creditCards];
+        newCards[index][field] = value;
+        setCreditCards(newCards);
+    };
+
+    const addCreditCard = () => {
+        if (creditCards.length < 3) {
+            setCreditCards([...creditCards, { number: '', expiry: '', cvv: '' }]);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,16 +55,16 @@ const Registration = () => {
             email,
             password,
             billingAddress,
-            creditCardNumber,
+            creditCards: creditCards.filter(card => card.number), // Include only filled cards
             promotionOptIn,
         };
 
         try {
             await registerUser(userData);
-            setSuccess('Registration successful!'); // Set success message
-            router.push('/confirmation'); // Redirect to confirmation page
+            setSuccess('Registration successful!');
+            router.push('/confirmation');
         } catch (error) {
-            setError('Registration failed. Please try again.'); // Set error message
+            setError('Registration failed. Please try again.');
             console.error("Registration error:", error);
         }
     };
@@ -188,66 +197,76 @@ const Registration = () => {
                             />
                         </div>
 
-                        <div className="mt-4">
-                            <label className="inline-flex items-center">
-                                <input
-                                    type="checkbox"
-                                    checked={promotionOptIn}
-                                    onChange={(e) => setPromotionOptIn(e.target.checked)}
-                                    className="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
-                                />
-                                <span className="ml-2 text-sm text-gray-700">Register for promotions and offers</span>
-                            </label>
-                        </div>
-
+                        {/* Credit Card Information Section */}
                         <h3 className="text-lg font-semibold mt-4">Credit Card Information</h3>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="creditCardNumber">
-                                Credit Card Number
-                            </label>
-                            <input
-                                id="creditCardNumber"
-                                type="text"
-                                placeholder="Enter your credit card number"
-                                value={creditCardNumber}
-                                onChange={(e) => setCreditCardNumber(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
 
-                        <div className="flex space-x-4">
-                            <div className="w-1/2">
-                                <label className="block text-sm font-medium text-gray-700" htmlFor="expiryDate">
-                                    Expiry Date
+                        {creditCards.map((card, index) => (
+                            <div key={index} className="mb-4">
+                                <label className="block text-sm font-medium text-gray-700" htmlFor={`creditCardNumber${index}`}>
+                                    Credit Card Number
                                 </label>
                                 <input
-                                    id="expiryDate"
+                                    id={`creditCardNumber${index}`}
                                     type="text"
-                                    placeholder="MM/YY"
-                                    value={expiryDate}
-                                    onChange={(e) => setExpiryDate(e.target.value)}
+                                    placeholder="Enter your credit card number"
+                                    value={card.number}
+                                    onChange={(e) => handleCreditCardChange(index, 'number', e.target.value)}
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
-                            </div>
-                            <div className="w-1/2">
-                                <label className="block text-sm font-medium text-gray-700" htmlFor="cvv">
+
+                                <label className="block text-sm font-medium text-gray-700 mt-2" htmlFor={`creditCardExpiry${index}`}>
+                                    Expiry Date (MM/YY)
+                                </label>
+                                <input
+                                    id={`creditCardExpiry${index}`}
+                                    type="text"
+                                    placeholder="MM/YY"
+                                    value={card.expiry}
+                                    onChange={(e) => handleCreditCardChange(index, 'expiry', e.target.value)}
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                />
+
+                                <label className="block text-sm font-medium text-gray-700 mt-2" htmlFor={`creditCardCvv${index}`}>
                                     CVV
                                 </label>
                                 <input
-                                    id="cvv"
+                                    id={`creditCardCvv${index}`}
                                     type="text"
                                     placeholder="CVV"
-                                    value={cvv}
-                                    onChange={(e) => setCvv(e.target.value)}
+                                    value={card.cvv}
+                                    onChange={(e) => handleCreditCardChange(index, 'cvv', e.target.value)}
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
                             </div>
+                        ))}
+
+                        {creditCards.length < 3 && (
+                            <button
+                                type="button"
+                                onClick={addCreditCard}
+                                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 disabled:opacity-50"
+                            >
+                                Add Another Credit Card
+                            </button>
+                        )}
+
+                        <div className="flex items-center mt-4">
+                            <input
+                                id="promotions"
+                                type="checkbox"
+                                checked={promotionOptIn}
+                                onChange={(e) => setPromotionOptIn(e.target.checked)}
+                                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                            />
+                            <label htmlFor="promotions" className="ml-2 block text-sm text-gray-900">
+                                Register for promotions and offers
+                            </label>
                         </div>
 
                         <div>
                             <button
                                 type="submit"
-                                className="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200"
                             >
                                 Register
                             </button>
@@ -260,3 +279,9 @@ const Registration = () => {
 };
 
 export default Registration;
+
+
+
+
+
+
