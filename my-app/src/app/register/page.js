@@ -175,6 +175,20 @@ const Registration = () => {
                         </div>
 
                         <div>
+                            <label className="block text-sm font-medium text-gray-700" htmlFor="country">
+                                State
+                            </label>
+                            <input
+                                id="state"
+                                type="text"
+                                placeholder="Enter your state"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
+
+                        <div>
                             <label className="block text-sm font-medium text-gray-700" htmlFor="postalCode">
                                 Postal Code
                             </label>
@@ -188,26 +202,13 @@ const Registration = () => {
                             />
                         </div>
 
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700" htmlFor="country">
-                                Country
-                            </label>
-                            <input
-                                id="country"
-                                type="text"
-                                placeholder="Enter your country"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
-
                         {/* Credit Card Information Section */}
                         <h3 className="text-lg font-semibold mt-4">Credit Card Information</h3>
 
                         {creditCards.map((card, index) => (
                             <div key={index} className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700" htmlFor={`creditCardNumber${index}`}>
+                                <label className="block text-sm font-medium text-gray-700"
+                                       htmlFor={`creditCardNumber${index}`}>
                                     Credit Card Number
                                 </label>
                                 <input
@@ -219,7 +220,8 @@ const Registration = () => {
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
 
-                                <label className="block text-sm font-medium text-gray-700 mt-2" htmlFor={`creditCardExpiry${index}`}>
+                                <label className="block text-sm font-medium text-gray-700 mt-2"
+                                       htmlFor={`creditCardExpiry${index}`}>
                                     Expiry Date (MM/YY)
                                 </label>
                                 <input
@@ -231,7 +233,8 @@ const Registration = () => {
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
 
-                                <label className="block text-sm font-medium text-gray-700 mt-2" htmlFor={`creditCardCvv${index}`}>
+                                <label className="block text-sm font-medium text-gray-700 mt-2"
+                                       htmlFor={`creditCardCvv${index}`}>
                                     CVV
                                 </label>
                                 <input
