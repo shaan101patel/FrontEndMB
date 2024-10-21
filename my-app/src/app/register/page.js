@@ -59,7 +59,7 @@ const Registration = () => {
             postalCode, // Add postal code
             country, // Add country
             creditCardNumber: creditCards.map(card => card.number), // Collect credit card numbers
-            expiryDate: creditCards.map(card => card.expiryDate), // Collect expiry dates
+            expiryDate: creditCards.map(card => card.expiry), // Collect expiry dates
             cvv: creditCards.map(card => card.cvv), // Collect CVVs
             promotionOptIn,
         };
@@ -228,7 +228,7 @@ const Registration = () => {
                                     id={`creditCardExpiry${index}`}
                                     type="text"
                                     placeholder="MM/YY"
-                                    value={card.expiry}
+                                    value={card.expiryDate}
                                     onChange={(e) => handleCreditCardChange(index, 'expiry', e.target.value)}
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
