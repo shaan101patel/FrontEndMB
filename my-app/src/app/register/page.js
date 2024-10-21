@@ -56,8 +56,8 @@ const Registration = () => {
             password,
             billingAddress,
             city, // Add city
-            postalCode, // Add postal code
-            country, // Add country
+            state, // Add postal code
+            postalCode, // Add country
             creditCardNumber: creditCards.map(card => card.number), // Collect credit card numbers
             expiryDate: creditCards.map(card => card.expiry), // Collect expiry dates
             cvv: creditCards.map(card => card.cvv), // Collect CVVs

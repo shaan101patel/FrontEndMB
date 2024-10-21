@@ -530,8 +530,8 @@ export default function EditProfile() {
         confirmPassword: '',
         billingAddress: '',
         city: '',
+        state: '',
         postalCode: '',
-        country: '',
         creditCards: [],
         promotions: false,
     });
@@ -547,7 +547,7 @@ export default function EditProfile() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const userData = await fetchUserProfile('jheel.dhruv04@gmail.com'); // Adjust the function call as needed
+                const userData = await fetchUserProfile(); // Adjust the function call as needed
 
                 console.log("hi logg");
 
@@ -560,8 +560,8 @@ export default function EditProfile() {
                     confirmPassword: '',
                     billingAddress: userData.billingAddress || '',
                     city: userData.city || '',
+                    state: userData.state || '',
                     postalCode: userData.postalCode || '',
-                    country: userData.country || '',
                     creditCards: userData.creditCards || [],
                     promotions: userData.promotions || false,
                 });
@@ -714,23 +714,23 @@ export default function EditProfile() {
                         </div>
 
                         <div className="form-group">
+                            <label htmlFor="state">State</label>
+                            <input
+                                type="text"
+                                id="state"
+                                name="state"
+                                value={formData.state}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        <div className="form-group">
                             <label htmlFor="postalCode">Postal Code</label>
                             <input
                                 type="text"
                                 id="postalCode"
                                 name="postalCode"
                                 value={formData.postalCode}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="country">Country</label>
-                            <input
-                                type="text"
-                                id="country"
-                                name="country"
-                                value={formData.country}
                                 onChange={handleChange}
                             />
                         </div>
