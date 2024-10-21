@@ -518,7 +518,8 @@ export default function EditProfile() {
 
 import React, { useEffect, useState } from 'react';
 import './page.css';
-import { fetchUserProfile, updateUserProfile } from '../movieService'; // Adjust the import path
+import { fetchUserProfile } from '../movieService'; // Import your fetch function
+import { updateUserProfile } from '../movieService'; // Adjust the import path
 
 export default function EditProfile() {
     const [formData, setFormData] = useState({
@@ -546,41 +547,32 @@ export default function EditProfile() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                if (!formData.email) {
-                    console.log('Email is not defined or empty');
-                    return;
-                }
+                const userData = await fetchUserProfile('jheel.dhruv04@gmail.com'); // Adjust the function call as needed
 
-                console.log(`Fetching profile for email: ${formData.email}`);
-                const userData = await fetchUserProfile(formData.email);
+                console.log("hi logg");
 
-                if (userData) {
-                    console.log("User data fetched:", userData);
-                    setFormData({
-                        name: userData.name || '',
-                        email: userData.email || '',
-                        currentPassword: '',
-                        password: '',
-                        confirmPassword: '',
-                        billingAddress: userData.billingAddress || '',
-                        city: userData.city || '',
-                        postalCode: userData.postalCode || '',
-                        country: userData.country || '',
-                        creditCards: userData.creditCards || [],
-                        promotions: userData.promotions || false,
-                    });
-                } else {
-                    console.log("No user data returned");
-                }
-
+                // Pre-fill form data with user data
+                setFormData({
+                    name: userData.name,
+                    email: userData.email,
+                    currentPassword: '',
+                    password: '',
+                    confirmPassword: '',
+                    billingAddress: userData.billingAddress || '',
+                    city: userData.city || '',
+                    postalCode: userData.postalCode || '',
+                    country: userData.country || '',
+                    creditCards: userData.creditCards || [],
+                    promotions: userData.promotions || false,
+                });
             } catch (error) {
-                console.error("Error fetching user profile:", error);
+                console.error('Error fetching user data:', error);
                 setError('Failed to fetch user data.');
             }
         };
 
         fetchUserData();
-    }, []); // Ensure dependencies are correctly set
+    }, []);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -669,6 +661,7 @@ export default function EditProfile() {
                                 name="currentPassword"
                                 value={formData.currentPassword}
                                 onChange={handleChange}
+                                // Removed the required attribute to make it optional
                             />
                         </div>
 
@@ -748,6 +741,7 @@ export default function EditProfile() {
 
                         {formData.creditCards.map((card, index) => (
                             <div key={index} className="credit-card-display">
+                                {/* Check if card and creditCardNumber exist */}
                                 <p>
                                     Card {index + 1}: **** **** **** {card.creditCardNumber ? card.creditCardNumber.slice(-4) : 'N/A'}
                                 </p>
@@ -827,5 +821,4 @@ export default function EditProfile() {
         </div>
     );
 }
-
 
