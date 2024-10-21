@@ -741,7 +741,10 @@ export default function EditProfile() {
 
                         {formData.creditCards.map((card, index) => (
                             <div key={index} className="credit-card-display">
-                                <p>Card {index + 1}: **** **** **** {card.creditCardNumber.slice(-4)}</p>
+                                {/* Check if card and creditCardNumber exist */}
+                                <p>
+                                    Card {index + 1}: **** **** **** {card.creditCardNumber ? card.creditCardNumber.slice(-4) : 'N/A'}
+                                </p>
                             </div>
                         ))}
 

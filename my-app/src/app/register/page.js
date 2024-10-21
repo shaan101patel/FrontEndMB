@@ -55,7 +55,12 @@ const Registration = () => {
             email,
             password,
             billingAddress,
-            creditCards: creditCards.filter(card => card.number), // Include only filled cards
+            city, // Add city
+            postalCode, // Add postal code
+            country, // Add country
+            creditCardNumber: creditCards.map(card => card.number), // Collect credit card numbers
+            expiryDate: creditCards.map(card => card.expiryDate), // Collect expiry dates
+            cvv: creditCards.map(card => card.cvv), // Collect CVVs
             promotionOptIn,
         };
 
