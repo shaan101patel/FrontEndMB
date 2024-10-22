@@ -16,7 +16,7 @@ const Registration = () => {
     const [billingAddress, setBillingAddress] = useState('');
     const [city, setCity] = useState('');
     const [postalCode, setPostalCode] = useState('');
-    const [country, setCountry] = useState('');
+    const [state, setState] = useState('');
 
     // State for credit cards
     const [creditCards, setCreditCards] = useState([{ number: '', expiry: '', cvv: '' }]);
@@ -56,8 +56,8 @@ const Registration = () => {
             password,
             billingAddress,
             city, // Add city
-            state, // Add postal code
-            postalCode, // Add country
+            postalCode, // Add postal code
+            state, // Add country
             creditCardNumber: creditCards.map(card => card.number), // Collect credit card numbers
             expiryDate: creditCards.map(card => card.expiry), // Collect expiry dates
             cvv: creditCards.map(card => card.cvv), // Collect CVVs
@@ -182,8 +182,8 @@ const Registration = () => {
                                 id="state"
                                 type="text"
                                 placeholder="Enter your state"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
+                                value={state}
+                                onChange={(e) => setState(e.target.value)}
                                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             />
                         </div>
@@ -228,7 +228,7 @@ const Registration = () => {
                                     id={`creditCardExpiry${index}`}
                                     type="text"
                                     placeholder="MM/YY"
-                                    value={card.expiryDate}
+                                    value={card.expiry}
                                     onChange={(e) => handleCreditCardChange(index, 'expiry', e.target.value)}
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
@@ -239,7 +239,7 @@ const Registration = () => {
                                 </label>
                                 <input
                                     id={`creditCardCvv${index}`}
-                                    type="text"
+                                    type="password" //text
                                     placeholder="CVV"
                                     value={card.cvv}
                                     onChange={(e) => handleCreditCardChange(index, 'cvv', e.target.value)}
@@ -287,6 +287,7 @@ const Registration = () => {
 };
 
 export default Registration;
+
 
 
 

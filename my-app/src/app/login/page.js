@@ -444,6 +444,8 @@ import { loginUser } from '../movieService'; // Import the loginUser function
 import Link from 'next/link';
 import './page.css'; // Import the CSS file
 
+import { fetchUserProfile } from "../movieService";
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -470,9 +472,14 @@ const Login = () => {
     };
 
     const handleLogin = async () => {
+
         try {
             const response = await loginUser(email, password);
             console.log(response); // Log the response to see its value
+
+            setEmail(response.email); // Set the email in state
+            console.log("Logged in email:", response.email);
+
 
             if (response.role) { // Check if the response has a role
                 // If "Remember Me" is checked, store credentials
@@ -491,6 +498,7 @@ const Login = () => {
 
                 // Create and dispatch a custom event to signal that the user has logged in
                 window.dispatchEvent(new Event('login'));
+
 
                 router.push(response.role === 'user' ? '/' : '/admin'); // Redirect based on role
             }
