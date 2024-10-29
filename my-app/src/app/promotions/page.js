@@ -6,12 +6,10 @@ import React, { useState } from 'react';
 import './page.css';
 
 export default function ManagePromotions() {
-    const [promotions, setPromotions] = useState([
-        { id: 1, title: 'Special Sale', discount: '20%', validUntil: '12-10-2024' },
-        { id: 2, title: 'Weekend Special', discount: '15%', validUntil: '12-28-2024' },
-    ]);
+    const [promotions, setPromotions] = useState([]);
     const [newPromotion, setNewPromotion] = useState({ title: '', discount: '', validUntil: '' });
 
+    // Function to add a new promotion to the list
     const handleAddPromotion = () => {
         if (!newPromotion.title || !newPromotion.discount || !newPromotion.validUntil) {
             alert("Please fill in all fields.");
@@ -26,6 +24,7 @@ export default function ManagePromotions() {
         setNewPromotion({ title: '', discount: '', validUntil: '' });
     };
 
+    // Function to delete a promotion from the list
     const handleDeletePromotion = (id) => {
         const updatedPromotions = promotions.filter(promotion => promotion.id !== id);
         setPromotions(updatedPromotions);

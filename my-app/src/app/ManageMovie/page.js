@@ -6,12 +6,10 @@ import React, { useState } from 'react';
 import './page.css'; // Import the CSS file
 
 export default function ManageMovies() {
-    const [movies, setMovies] = useState([
-        { id: 1, title: 'Barbie', schedule: '12:00 PM' },
-        { id: 2, title: 'Oppenheimer', schedule: '3:00 PM' },
-    ]);
+    const [movies, setMovies] = useState([]);
     const [newMovie, setNewMovie] = useState({ title: '', schedule: '' });
 
+    // Function to add a new movie to the list
     const handleAddMovie = () => {
         if (!newMovie.title || !newMovie.schedule) {
             alert("Please fill in all fields.");
@@ -26,6 +24,7 @@ export default function ManageMovies() {
         setNewMovie({ title: '', schedule: '' });
     };
 
+    // Function to delete a movie from the list
     const handleDeleteMovie = (id) => {
         const updatedMovies = movies.filter(movie => movie.id !== id);
         setMovies(updatedMovies);

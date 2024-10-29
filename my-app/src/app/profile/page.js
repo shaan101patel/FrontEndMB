@@ -1173,7 +1173,7 @@ export default function EditProfile() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const userData = await fetchUserProfile('jheel.dhruv04@gmail.com'); // Adjust as needed
+                const userData = await fetchUserProfile('shrutichari4@gmail.com'); // Adjust as needed
 
                 // Pre-fill form data with user data
                 setFormData({
@@ -1229,6 +1229,7 @@ export default function EditProfile() {
         setError('');
     };
 
+    /*
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { password, confirmPassword, currentPassword } = formData;
@@ -1252,6 +1253,35 @@ export default function EditProfile() {
             console.error('Error updating profile:', error);
         }
     };
+     */
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { password, confirmPassword, currentPassword, creditCards } = formData;
+
+        if (password && confirmPassword && password !== confirmPassword) {
+            setError('Passwords do not match.');
+            return;
+        }
+
+        if (password && currentPassword === '') {
+            setError('Please provide your current password to change your password.');
+            return;
+        }
+
+        try {
+            const response = await updateUserProfile({
+                ...formData,
+                creditCards // Send the entire array of credit cards
+            });
+            setSuccess('Profile updated successfully!');
+            console.log('Response from server:', response);
+        } catch (error) {
+            setError('Failed to update profile: ' + (error.response?.data || error.message));
+            console.error('Error updating profile:', error);
+        }
+    };
+
 
     return (
         <div className="edit-profile-container">
