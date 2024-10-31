@@ -1,27 +1,36 @@
-// app/promotions/page.js
-
 "use client";
 
 import React, { useState } from 'react';
+import { addPromotion } from '../movieService'; // Adjust the path if necessary
 import './page.css';
 
 export default function ManagePromotions() {
     const [promotions, setPromotions] = useState([]);
     const [newPromotion, setNewPromotion] = useState({ title: '', discount: '', validUntil: '' });
+    const [error, setError] = useState('');
 
-    // Function to add a new promotion to the list
-    const handleAddPromotion = () => {
+    // Function to add a new promotion to the list and notify users
+    const handleAddPromotion = async () => {
         if (!newPromotion.title || !newPromotion.discount || !newPromotion.validUntil) {
             alert("Please fill in all fields.");
             return;
         }
 
-        const updatedPromotions = [
-            ...promotions,
-            { id: promotions.length + 1, ...newPromotion },
-        ];
-        setPromotions(updatedPromotions);
-        setNewPromotion({ title: '', discount: '', validUntil: '' });
+        try {
+            // Call the addPromotion function to send data to the backend
+            const addedPromotion = await addPromotion(newPromotion);
+
+            // Add the new promotion to the local state
+            const updatedPromotions = [
+                ...promotions,
+                { id: addedPromotion.id, ...newPromotion }, // Assuming the backend returns the new promotion with an id
+            ];
+            setPromotions(updatedPromotions);
+            setNewPromotion({ title: '', discount: '', validUntil: '' }); // Reset input fields
+        } catch (error) {
+            console.error("Error adding promotion:", error);
+            setError("Failed to add promotion. Please try again.");
+        }
     };
 
     // Function to delete a promotion from the list
@@ -33,6 +42,8 @@ export default function ManagePromotions() {
     return (
         <div className="promotions-container">
             <h2 className="promotions-title">Manage Promotions</h2>
+
+            {error && <p className="error-message">{error}</p>} {/* Display error message */}
 
             <div className="add-promotion-section">
                 <h3 className="section-subtitle">Add New Promotion</h3>
@@ -84,3 +95,4 @@ export default function ManagePromotions() {
         </div>
     );
 }
+

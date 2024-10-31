@@ -1173,7 +1173,7 @@ export default function EditProfile() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const userData = await fetchUserProfile('shrutichari4@gmail.com'); // Adjust as needed
+                const userData = await fetchUserProfile('jheel.dhruv04@gmail.com'); // Adjust as needed
 
                 // Pre-fill form data with user data
                 setFormData({

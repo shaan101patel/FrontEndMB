@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 // Base API URLs
@@ -8,6 +7,42 @@ const REGISTER_URL = 'http://localhost:9090/register'; // For registering users
 const VERIFY_EMAIL_URL = 'http://localhost:9090/Success'; // For verifying emails
 const LOGIN_URL = 'http://localhost:9090/login'; // For login
 const USER_PROFILE_URL = 'http://localhost:9090/user-profile'; // For getting user profile
+const ADD_MOVIE_URL = 'http://localhost:9090/add-movie'; // URL for adding a new movie
+const PROMOTION_OPTIN_URL = 'http://localhost:9090/api/users/promotion-optin';
+const ADD_PROMOTION_URL = 'http://localhost:9090/api/promotions/add';
+
+// Function to update promotion opt-in status for a user
+export const updatePromotionOptIn = async (userId, optIn) => {
+    try {
+        const response = await axios.post(PROMOTION_OPTIN_URL, { userId, optIn });
+        return response.data;
+    } catch (error) {
+        console.error("Failed to update promotion opt-in status:", error);
+        throw error;
+    }
+};
+
+// Function to add a new promotion and send notifications to opted-in users
+export const addPromotion = async (promotionData) => {
+    try {
+        const response = await axios.post(ADD_PROMOTION_URL, promotionData);
+        return response.data;
+    } catch (error) {
+        console.error("Failed to add promotion:", error);
+        throw error;
+    }
+};
+
+// Function to add a movie to the database
+export const addMovie = async (movieData) => {
+    try {
+        const response = await axios.post(ADD_MOVIE_URL, movieData);
+        return response.data;
+    } catch (error) {
+        console.error("Failed to add movie:", error);
+        throw error;
+    }
+};
 
 // Function to fetch all movies
 export const fetchMovies = async () => {
