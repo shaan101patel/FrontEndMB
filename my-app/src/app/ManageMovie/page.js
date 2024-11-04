@@ -1,8 +1,7 @@
-"use client";
-
+/*"use client";
 import React, { useState } from 'react';
-import './page.css'; // Import the CSS file
-import { addMovie } from '../movieService'; // Import the addMovie function from movieService
+import './page.css';
+import { addMovie } from '../movieService';
 
 export default function ManageMovies() {
     const [movies, setMovies] = useState([]);
@@ -15,25 +14,29 @@ export default function ManageMovies() {
         trailerUrl: '',
         movieLength: '',
         shortDescription: '',
-        status: ''
+        status: '',
+        showDates: '',
+        showTimes: '',
+        genre: '' // New genre field
     });
 
-    // Function to add a new movie to the list and the backend
     const handleAddMovie = async () => {
-        // Check if all fields are filled in
         if (Object.values(newMovie).some(field => !field)) {
             alert("Please fill in all fields.");
             return;
         }
 
         try {
-            // Add movie to backend
-            await addMovie(newMovie);
+            const formattedMovie = {
+                ...newMovie,
+                showDates: newMovie.showDates.split(',').map(date => new Date(date.trim())),
+                showTimes: newMovie.showTimes.split(',').map(time => time.trim())
+            };
 
-            // Update the local state if the movie is successfully added in backend
+            await addMovie(formattedMovie);
             const updatedMovies = [
                 ...movies,
-                { id: movies.length + 1, ...newMovie },
+                { id: movies.length + 1, ...formattedMovie }
             ];
             setMovies(updatedMovies);
             setNewMovie({
@@ -45,26 +48,21 @@ export default function ManageMovies() {
                 trailerUrl: '',
                 movieLength: '',
                 shortDescription: '',
-                status: ''
+                status: '',
+                showDates: '',
+                showTimes: '',
+                genre: '' // Reset genre field
             });
         } catch (error) {
             alert("Failed to add movie. Please try again.");
         }
     };
 
-    // Function to delete a movie from the list
-    const handleDeleteMovie = (id) => {
-        const updatedMovies = movies.filter(movie => movie.id !== id);
-        setMovies(updatedMovies);
-    };
-
     return (
         <div className="manage-movies-container">
             <h2 className="manage-movies-title">Manage Movies</h2>
-
             <div className="add-movie-section">
                 <h3 className="section-subtitle">Add New Movie</h3>
-
                 <input
                     type="text"
                     placeholder="Movie Name"
@@ -127,6 +125,27 @@ export default function ManageMovies() {
                     onChange={(e) => setNewMovie({ ...newMovie, status: e.target.value })}
                     className="input-field"
                 />
+                <input
+                    type="text"
+                    placeholder="Show Dates (comma-separated, e.g., 2024-11-01, 2024-11-02)"
+                    value={newMovie.showDates}
+                    onChange={(e) => setNewMovie({ ...newMovie, showDates: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Show Times (comma-separated, e.g., 2:00 PM, 6:00 PM)"
+                    value={newMovie.showTimes}
+                    onChange={(e) => setNewMovie({ ...newMovie, showTimes: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Genre"
+                    value={newMovie.genre}
+                    onChange={(e) => setNewMovie({ ...newMovie, genre: e.target.value })}
+                    className="input-field"
+                />
                 <button
                     onClick={handleAddMovie}
                     className="add-button"
@@ -134,29 +153,132 @@ export default function ManageMovies() {
                     Add Movie
                 </button>
             </div>
+        </div>
+    );
+}*/
 
-            <ul className="movies-list">
-                {movies.map((movie) => (
-                    <li key={movie.id} className="movie-item">
-                        <div>
-                            <p className="movie-title">{movie.movieName}</p>
-                            <p className="movie-details">
-                                Director: {movie.directorName} | Released: {movie.yearReleased} | Rating: {movie.movieRating}
-                            </p>
-                            <p className="movie-schedule">Status: {movie.status}</p>
-                            <p className="movie-description">{movie.shortDescription}</p>
+"use client";
+import React, { useState } from 'react';
+import './page.css';
+import { addMovie } from '../movieService';
+import SearchBar from './SearchBar';
+
+export default function ManageMovies() {
+    const [movies, setMovies] = useState([]);
+    const [newMovie, setNewMovie] = useState({
+        movieName: '',
+        directorName: '',
+        yearReleased: '',
+        movieRating: '',
+        moviePoster: '',
+        trailerUrl: '',
+        movieLength: '',
+        shortDescription: '',
+        status: '',
+        showDates: '',
+        showTimes: '',
+        genre: ''
+    });
+    const [filteredMovies, setFilteredMovies] = useState(movies);
+
+    const handleAddMovie = async () => {
+        if (Object.values(newMovie).some(field => !field)) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        try {
+            const formattedMovie = {
+                ...newMovie,
+                showDates: newMovie.showDates.split(',').map(date => new Date(date.trim())),
+                showTimes: newMovie.showTimes.split(',').map(time => time.trim())
+            };
+
+            await addMovie(formattedMovie);
+            const updatedMovies = [...movies, { id: movies.length + 1, ...formattedMovie }];
+            setMovies(updatedMovies);
+            setFilteredMovies(updatedMovies);
+
+            // Reset the form
+            setNewMovie({
+                movieName: '',
+                directorName: '',
+                yearReleased: '',
+                movieRating: '',
+                moviePoster: '',
+                trailerUrl: '',
+                movieLength: '',
+                shortDescription: '',
+                status: '',
+                showDates: '',
+                showTimes: '',
+                genre: ''
+            });
+        } catch (error) {
+            alert("Failed to add movie. Please try again.");
+        }
+    };
+
+    const handleSearch = (term) => {
+        console.log("Search term:", term); // Debug: Log the search term
+        if (term) {
+            const lowerCaseTerm = term.toLowerCase();
+            const results = movies.filter(movie =>
+                (movie.movieName.toLowerCase().includes(lowerCaseTerm) ||
+                    (movie.genre && movie.genre.toLowerCase().includes(lowerCaseTerm)))
+            );
+            console.log("Filtered results:", results); // Debug: Log filtered results
+            setFilteredMovies(results);
+        } else {
+            setFilteredMovies(movies);
+        }
+    };
+
+
+    return (
+        <div className="manage-movies-container">
+            <h2 className="manage-movies-title">Manage Movies</h2>
+            <SearchBar onSearch={handleSearch} />
+
+            <div className="add-movie-section">
+                <h3 className="section-subtitle">Add New Movie</h3>
+                <input
+                    type="text"
+                    placeholder="Movie Name"
+                    value={newMovie.movieName}
+                    onChange={(e) => setNewMovie({ ...newMovie, movieName: e.target.value })}
+                    className="input-field"
+                />
+                {/* Other input fields */}
+                <input
+                    type="text"
+                    placeholder="Genre"
+                    value={newMovie.genre}
+                    onChange={(e) => setNewMovie({ ...newMovie, genre: e.target.value })}
+                    className="input-field"
+                />
+                <button onClick={handleAddMovie} className="add-button">
+                    Add Movie
+                </button>
+            </div>
+
+            <div className="movie-list">
+                <h3>Movie List</h3>
+                {filteredMovies.length > 0 ? (
+                    filteredMovies.map((movie) => (
+                        <div key={movie.id} className="movie-item">
+                            <h4>{movie.movieName}</h4>
+                            <p>Genre: {movie.genre}</p>
+                            {/* Display other movie details */}
                         </div>
-                        <button
-                            onClick={() => handleDeleteMovie(movie.id)}
-                            className="delete-button"
-                        >
-                            Delete
-                        </button>
-                    </li>
-                ))}
-            </ul>
+                    ))
+                ) : (
+                    <p>No movies found.</p>
+                )}
+            </div>
         </div>
     );
 }
+
 
 
