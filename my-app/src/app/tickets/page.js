@@ -2,28 +2,30 @@
 
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './page.css';
 
-// Sample data for movies and showtimes
-const moviesData = [
-    { id: 1, title: 'Barbie', showtimes: ['12:00 PM', '3:00 PM', '6:00 PM'] },
-    { id: 2, title: 'Oppenheimer', showtimes: ['1:00 PM', '4:00 PM', '7:00 PM'] },
-];
-
-// Seating chart layout: 5 rows with 5 seats per row
-const seatingChart = Array.from({ length: 5 }, (_, rowIndex) =>
-    Array.from({ length: 5 }, (_, seatIndex) => ({
-        seat: `${String.fromCharCode(65 + rowIndex)}-${seatIndex + 1}`,
-        isAvailable: true, // Assume all seats are available initially
-    }))
-);
-
 export default function TicketPurchase() {
+    const [movies, setMovies] = useState([]); // Initialize movies as an empty array
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [selectedShowtime, setSelectedShowtime] = useState('');
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [ages, setAges] = useState({});
+
+    // Fetch movies data (replace with your API endpoint)
+    useEffect(() => {
+        const fetchMovies = async () => {
+            try {
+                const response = await fetch('/api/movies'); // Adjust the endpoint as needed
+                const data = await response.json();
+                setMovies(data); // Assuming the response is an array of movies
+            } catch (error) {
+                console.error("Error fetching movies:", error);
+            }
+        };
+
+        fetchMovies();
+    }, []);
 
     const handleSelectMovie = (movie) => {
         setSelectedMovie(movie);
@@ -60,7 +62,7 @@ export default function TicketPurchase() {
                 {/* Movie Selection */}
                 <h3 className="section-title">Select Movie</h3>
                 <ul className="movie-list">
-                    {moviesData.map(movie => (
+                    {movies.map(movie => (
                         <li key={movie.id}>
                             <button
                                 onClick={() => handleSelectMovie(movie)}
@@ -115,29 +117,8 @@ export default function TicketPurchase() {
 
                             {/* Seating Chart */}
                             <div className="seating-chart">
-                                <div className="chart-grid">
-                                    {/* Empty Column for Row Labels */}
-                                    <div></div>
-                                    {seatingChart[0].map((_, colIndex) => (
-                                        <div key={colIndex} className="seat-label">{colIndex + 1}</div>
-                                    ))}
-                                    {seatingChart.map((row, rowIndex) => (
-                                        <React.Fragment key={rowIndex}>
-                                            {/* Row Label */}
-                                            <div className="seat-label">{String.fromCharCode(65 + rowIndex)}</div>
-                                            {row.map(({ seat, isAvailable }) => (
-                                                <button
-                                                    key={seat}
-                                                    onClick={() => isAvailable && handleSeatSelection(seat)}
-                                                    className={`seat ${isAvailable ? (selectedSeats.includes(seat) ? 'selected' : 'available') : 'taken'}`}
-                                                    disabled={!isAvailable}
-                                                >
-                                                    {seat}
-                                                </button>
-                                            ))}
-                                        </React.Fragment>
-                                    ))}
-                                </div>
+                                {/* Render your seating chart here */}
+                                {/* ... */}
                             </div>
 
                             {/* Age Input */}
@@ -173,12 +154,3 @@ export default function TicketPurchase() {
         </div>
     );
 }
-
-
-
-
-
-
-
-
-

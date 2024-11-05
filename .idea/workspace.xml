@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="fixed admin">
+    <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="fixed homepage">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-app/src/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/tickets/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/tickets/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +76,7 @@
       <workItem from="1730391559567" duration="29000" />
       <workItem from="1730648467596" duration="152000" />
       <workItem from="1730742849829" duration="3195000" />
-      <workItem from="1730748808959" duration="2196000" />
+      <workItem from="1730748808959" duration="3014000" />
     </task>
     <task id="LOCAL-00001" summary="testing">
       <option name="closed" value="true" />
@@ -92,7 +94,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730160728579</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fixed homepage">
+      <option name="closed" value="true" />
+      <created>1730765985899</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730765985899</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +111,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="testing" />
     <MESSAGE value="fixed admin" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed admin" />
+    <MESSAGE value="fixed homepage" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed homepage" />
   </component>
 </project>

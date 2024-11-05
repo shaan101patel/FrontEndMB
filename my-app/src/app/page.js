@@ -416,7 +416,7 @@ export default function Home() {
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-
+``
 import SearchBar from './search/page'; // Adjust the import as necessary
 import { fetchMovies, searchMovies } from './movieService';
 
