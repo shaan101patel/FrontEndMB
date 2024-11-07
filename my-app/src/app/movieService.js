@@ -11,6 +11,16 @@ const ADD_MOVIE_URL = 'http://localhost:9090/add-movie'; // URL for adding a new
 const PROMOTION_OPTIN_URL = 'http://localhost:9090/api/users/promotion-optin';
 const ADD_PROMOTION_URL = 'http://localhost:9090/api/promotions/add';
 
+
+export const createBooking = async (bookingData) => {
+    try {
+        const response = await axios.post('http://localhost:9090/api/bookings', bookingData);
+        return response.data; // Contains success and bookingId if successful
+    } catch (error) {
+        console.error("Error creating booking:", error);
+        throw error;
+    }
+};
 // Function to update promotion opt-in status for a user
 export const updatePromotionOptIn = async (userId, optIn) => {
     try {
