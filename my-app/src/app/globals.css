@@ -28,6 +28,7 @@ body {
 }
 */
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,14 +36,14 @@ body {
 :root {
     --background: #ffffff;
     --foreground: #171717;
-    --accent: #6b7280; /* Neutral gray instead of blue */
+    --accent: #6b7280;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --background: #0a0a0a;
         --foreground: #ededed;
-        --accent: #9ca3af; /* Lighter neutral gray for dark mode */
+        --accent: #9ca3af;
     }
 }
 
@@ -76,7 +77,7 @@ button {
 }
 
 button:hover {
-    background-color: #4b5563; /* Darker gray on hover */
+    background-color: #4b5563;
 }
 
 .card {

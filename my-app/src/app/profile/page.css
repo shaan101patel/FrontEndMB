@@ -4,7 +4,6 @@
     justify-content: center;
     align-items: flex-start; /* Allow flexibility with content placement */
     padding: 50px 20px; /* Create space around the container */
-    background-color: #f4f4f4;
     min-height: calc(100vh - 100px); /* Ensure room for header and footer */
     box-sizing: border-box;
 }

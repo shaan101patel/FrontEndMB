@@ -175,6 +175,7 @@ import { fetchMovieById } from '../../movieService';
 import { createBooking } from '../../movieService'; // Import createBooking
 import './page.css';
 import { useRouter } from 'next/navigation'; // Corrected import for useRouter
+import  '../../globals.css';
 
 export default function TicketPurchase({ params }) {
     const { id } = params; // Get the movie ID from params

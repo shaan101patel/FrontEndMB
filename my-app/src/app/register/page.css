@@ -8,7 +8,6 @@ html, body {
 
 .registration-container {
     min-height: 100vh;
-    background-color: #e9ecef; /* Softer light background color */
     display: flex;
     align-items: center;
     justify-content: center;
