@@ -146,7 +146,7 @@ export const fetchMovieById = async (id) => {
         return response.data;
     } catch (error) {
         console.error("Failed to fetch movie by ID:", error);
-        throw error; // Rethrow the error to handle it in the frontend
+        throw error;
     }
 };
 

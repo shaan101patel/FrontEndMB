@@ -161,7 +161,7 @@ export default function ManageMovies() {
 import React, { useState } from 'react';
 import './page.css';
 import { addMovie } from '../movieService';
-import SearchBar from './SearchBar';
+import SearchBar from '../search/page';
 
 export default function ManageMovies() {
     const [movies, setMovies] = useState([]);
@@ -234,7 +234,6 @@ export default function ManageMovies() {
         }
     };
 
-
     return (
         <div className="manage-movies-container">
             <h2 className="manage-movies-title">Manage Movies</h2>
@@ -249,7 +248,76 @@ export default function ManageMovies() {
                     onChange={(e) => setNewMovie({ ...newMovie, movieName: e.target.value })}
                     className="input-field"
                 />
-                {/* Other input fields */}
+                <input
+                    type="text"
+                    placeholder="Director Name"
+                    value={newMovie.directorName}
+                    onChange={(e) => setNewMovie({ ...newMovie, directorName: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Year Released"
+                    value={newMovie.yearReleased}
+                    onChange={(e) => setNewMovie({ ...newMovie, yearReleased: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Rating"
+                    value={newMovie.movieRating}
+                    onChange={(e) => setNewMovie({ ...newMovie, movieRating: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Poster URL"
+                    value={newMovie.moviePoster}
+                    onChange={(e) => setNewMovie({ ...newMovie, moviePoster: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Trailer URL"
+                    value={newMovie.trailerUrl}
+                    onChange={(e) => setNewMovie({ ...newMovie, trailerUrl: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Length"
+                    value={newMovie.movieLength}
+                    onChange={(e) => setNewMovie({ ...newMovie, movieLength: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Description"
+                    value={newMovie.shortDescription}
+                    onChange={(e) => setNewMovie({ ...newMovie, shortDescription: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Status"
+                    value={newMovie.status}
+                    onChange={(e) => setNewMovie({ ...newMovie, status: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Show Dates (comma separated)"
+                    value={newMovie.showDates}
+                    onChange={(e) => setNewMovie({ ...newMovie, showDates: e.target.value })}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Show Times (comma separated)"
+                    value={newMovie.showTimes}
+                    onChange={(e) => setNewMovie({ ...newMovie, showTimes: e.target.value })}
+                    className="input-field"
+                />
                 <input
                     type="text"
                     placeholder="Genre"
@@ -268,8 +336,17 @@ export default function ManageMovies() {
                     filteredMovies.map((movie) => (
                         <div key={movie.id} className="movie-item">
                             <h4>{movie.movieName}</h4>
+                            <p>Director: {movie.directorName}</p>
+                            <p>Year Released: {movie.yearReleased}</p>
+                            <p>Rating: {movie.movieRating}</p>
+                            <p>Length: {movie.movieLength}</p>
+                            <p>Description: {movie.shortDescription}</p>
+                            <p>Status: {movie.status}</p>
+                            <p>Show Dates: {movie.showDates.join(', ')}</p>
+                            <p>Show Times: {movie.showTimes.join(', ')}</p>
                             <p>Genre: {movie.genre}</p>
-                            {/* Display other movie details */}
+                            <img src={movie.moviePoster} alt={`${movie.movieName} Poster`} className="movie-poster" />
+                            <a href={movie.trailerUrl} target="_blank" rel="noopener noreferrer">Watch Trailer</a>
                         </div>
                     ))
                 ) : (
@@ -279,6 +356,3 @@ export default function ManageMovies() {
         </div>
     );
 }
-
-
-

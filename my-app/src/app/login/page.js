@@ -436,7 +436,7 @@ const Login = () => {
 export default Login;
 */
 
-"use client"; // This marks the file as a Client Component
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // Importing router for navigation
@@ -453,7 +453,6 @@ const Login = () => {
     const [error, setError] = useState('');
     const router = useRouter();
 
-    // On component mount, check if credentials are stored
     useEffect(() => {
         const savedEmail = localStorage.getItem('rememberMe') === 'true' ? localStorage.getItem('email') : '';
         const savedPassword = localStorage.getItem('rememberMe') === 'true' ? localStorage.getItem('password') : '';
@@ -475,14 +474,14 @@ const Login = () => {
 
         try {
             const response = await loginUser(email, password);
-            console.log(response); // Log the response to see its value
+            console.log(response);
 
-            setEmail(response.email); // Set the email in state
+            setEmail(response.email);
             console.log("Logged in email:", response.email);
 
 
-            if (response.role) { // Check if the response has a role
-                // If "Remember Me" is checked, store credentials
+            if (response.role) {
+                localStorage.setItem('userEmail', response.email); // Check if the response has a role
                 if (rememberMe) {
                     localStorage.setItem('email', email);
                     localStorage.setItem('password', password); // Store only if it's secure
@@ -496,14 +495,12 @@ const Login = () => {
 
                 localStorage.setItem("userRole", response.role); // Store role in localStorage
 
-                // Create and dispatch a custom event to signal that the user has logged in
                 window.dispatchEvent(new Event('login'));
 
 
                 router.push(response.role === 'user' ? '/' : '/admin'); // Redirect based on role
             }
         } catch (err) {
-            //setError('Login Failed: ' + (err.response?.data?.message || 'Unknown error occurred'));
             setError('Login Failed ');
         }
     };
@@ -541,7 +538,6 @@ const Login = () => {
 
                 <Link className="link" href="/ForgotPassword">Forgot Password?</Link>
 
-                {/* New Sign-Up Option */}
                 <div className="signup-option">
                     <p><strong>Don't have an account?</strong> <Link href="/register" className="link">Sign up</Link></p>
                 </div>
