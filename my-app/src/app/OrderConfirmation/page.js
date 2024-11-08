@@ -93,7 +93,7 @@ export default function OrderConfirmation() {
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import './page.css';
-import { fetchUserProfile } from '../movieService.js'; // Import the profile fetching function
+import { fetchUserProfile, sendOrderConfirmationEmail } from '../movieService.js'; // Import the profile fetching function
 
 export default function OrderConfirmation() {
     const router = useRouter();
@@ -123,6 +123,8 @@ export default function OrderConfirmation() {
             };
 
             fetchPaymentInfo();
+            sendOrderConfirmationEmail(orderData); // Call to send the confirmation email
+
         }
     }, [orderData]);
 

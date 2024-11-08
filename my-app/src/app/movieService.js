@@ -10,6 +10,19 @@ const USER_PROFILE_URL = 'http://localhost:9090/user-profile'; // For getting us
 const ADD_MOVIE_URL = 'http://localhost:9090/add-movie'; // URL for adding a new movie
 const PROMOTION_OPTIN_URL = 'http://localhost:9090/api/users/promotion-optin';
 const ADD_PROMOTION_URL = 'http://localhost:9090/api/promotions/add';
+const SEND_EMAIL_URL = 'http://localhost:9090/send-confirmation-email';
+
+
+// Function to send order confirmation email
+export const sendOrderConfirmationEmail = async (orderData) => {
+    try {
+        const response = await axios.post(SEND_EMAIL_URL, orderData);
+        return response.data;
+    } catch (error) {
+        console.error("Failed to send confirmation email:", error);
+        throw error;
+    }
+}
 
 
 export const createBooking = async (bookingData) => {
