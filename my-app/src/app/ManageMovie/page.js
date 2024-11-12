@@ -170,6 +170,7 @@ export default function ManageMovies() {
         directorName: '',
         yearReleased: '',
         movieRating: '',
+        showRoom: '',
         moviePoster: '',
         trailerUrl: '',
         movieLength: '',
@@ -205,6 +206,7 @@ export default function ManageMovies() {
                 directorName: '',
                 yearReleased: '',
                 movieRating: '',
+                showRoom: '',
                 moviePoster: '',
                 trailerUrl: '',
                 movieLength: '',
@@ -245,84 +247,91 @@ export default function ManageMovies() {
                     type="text"
                     placeholder="Movie Name"
                     value={newMovie.movieName}
-                    onChange={(e) => setNewMovie({ ...newMovie, movieName: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, movieName: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Director Name"
                     value={newMovie.directorName}
-                    onChange={(e) => setNewMovie({ ...newMovie, directorName: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, directorName: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Year Released"
                     value={newMovie.yearReleased}
-                    onChange={(e) => setNewMovie({ ...newMovie, yearReleased: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, yearReleased: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Rating"
                     value={newMovie.movieRating}
-                    onChange={(e) => setNewMovie({ ...newMovie, movieRating: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, movieRating: e.target.value})}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Showroom"
+                    value={newMovie.showRoom}
+                    onChange={(e) => setNewMovie({...newMovie, showRoom: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Poster URL"
                     value={newMovie.moviePoster}
-                    onChange={(e) => setNewMovie({ ...newMovie, moviePoster: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, moviePoster: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Trailer URL"
                     value={newMovie.trailerUrl}
-                    onChange={(e) => setNewMovie({ ...newMovie, trailerUrl: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, trailerUrl: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Length"
                     value={newMovie.movieLength}
-                    onChange={(e) => setNewMovie({ ...newMovie, movieLength: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, movieLength: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Description"
                     value={newMovie.shortDescription}
-                    onChange={(e) => setNewMovie({ ...newMovie, shortDescription: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, shortDescription: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Status"
                     value={newMovie.status}
-                    onChange={(e) => setNewMovie({ ...newMovie, status: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, status: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Show Dates (comma separated)"
                     value={newMovie.showDates}
-                    onChange={(e) => setNewMovie({ ...newMovie, showDates: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, showDates: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Show Times (comma separated)"
                     value={newMovie.showTimes}
-                    onChange={(e) => setNewMovie({ ...newMovie, showTimes: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, showTimes: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Genre"
                     value={newMovie.genre}
-                    onChange={(e) => setNewMovie({ ...newMovie, genre: e.target.value })}
+                    onChange={(e) => setNewMovie({...newMovie, genre: e.target.value})}
                     className="input-field"
                 />
                 <button onClick={handleAddMovie} className="add-button">

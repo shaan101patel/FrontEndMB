@@ -8,6 +8,13 @@
     overflow-y: auto; /* Allow vertical scrolling */
 }
 
+.seat.booked {
+    background-color: red;
+    cursor: not-allowed;
+    color: white;
+}
+
+
 /* Inner card styling */
 .ticket-purchase-content {
     max-width: 600px; /* Control the card width */

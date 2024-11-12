@@ -24,6 +24,30 @@ export const sendOrderConfirmationEmail = async (orderData) => {
     }
 }
 
+export const fetchBookings = async (movieName, selectedDate, selectedTime) => {
+    try {
+        const response = await axios.get('http://localhost:9090/fetchBooking', {
+            params: {
+                movieName,
+                selectedDate,
+                selectedTime
+            }
+        });
+
+        if (response.data.success) {
+            const bookedSeats = response.data.bookedSeats;
+            // Ensure it's always an array, even if it's undefined or null
+            return Array.isArray(bookedSeats) ? bookedSeats : [];
+        } else {
+            throw new Error('Failed to fetch booked seats');
+        }
+    } catch (error) {
+        console.error("Error fetching booked seats:", error);
+        throw error;
+    }
+};
+
+
 
 export const createBooking = async (bookingData) => {
     try {
@@ -34,6 +58,7 @@ export const createBooking = async (bookingData) => {
         throw error;
     }
 };
+
 // Function to update promotion opt-in status for a user
 export const updatePromotionOptIn = async (userId, optIn) => {
     try {
