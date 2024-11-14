@@ -161,7 +161,6 @@ export default function ManageMovies() {
 import React, { useState } from 'react';
 import './page.css';
 import { addMovie } from '../movieService';
-import SearchBar from '../search/page';
 
 export default function ManageMovies() {
     const [movies, setMovies] = useState([]);
@@ -180,7 +179,7 @@ export default function ManageMovies() {
         showTimes: '',
         genre: ''
     });
-    const [filteredMovies, setFilteredMovies] = useState(movies);
+    const [confirmationMessage, setConfirmationMessage] = useState('');
 
     const handleAddMovie = async () => {
         if (Object.values(newMovie).some(field => !field)) {
@@ -196,11 +195,12 @@ export default function ManageMovies() {
             };
 
             await addMovie(formattedMovie);
-            const updatedMovies = [...movies, { id: movies.length + 1, ...formattedMovie }];
-            setMovies(updatedMovies);
-            setFilteredMovies(updatedMovies);
+            setMovies([...movies, { id: movies.length + 1, ...formattedMovie }]);
 
-            // Reset the form
+            // Display confirmation message
+            setConfirmationMessage('Movie added successfully!');
+
+            // Clear the form
             setNewMovie({
                 movieName: '',
                 directorName: '',
@@ -216,30 +216,17 @@ export default function ManageMovies() {
                 showTimes: '',
                 genre: ''
             });
+
+            // Clear confirmation message after a few seconds
+            setTimeout(() => setConfirmationMessage(''), 3000);
         } catch (error) {
             alert("Failed to add movie. Please try again.");
-        }
-    };
-
-    const handleSearch = (term) => {
-        console.log("Search term:", term); // Debug: Log the search term
-        if (term) {
-            const lowerCaseTerm = term.toLowerCase();
-            const results = movies.filter(movie =>
-                (movie.movieName.toLowerCase().includes(lowerCaseTerm) ||
-                    (movie.genre && movie.genre.toLowerCase().includes(lowerCaseTerm)))
-            );
-            console.log("Filtered results:", results); // Debug: Log filtered results
-            setFilteredMovies(results);
-        } else {
-            setFilteredMovies(movies);
         }
     };
 
     return (
         <div className="manage-movies-container">
             <h2 className="manage-movies-title">Manage Movies</h2>
-            <SearchBar onSearch={handleSearch} />
 
             <div className="add-movie-section">
                 <h3 className="section-subtitle">Add New Movie</h3>
@@ -337,29 +324,11 @@ export default function ManageMovies() {
                 <button onClick={handleAddMovie} className="add-button">
                     Add Movie
                 </button>
-            </div>
 
-            <div className="movie-list">
-                <h3>Movie List</h3>
-                {filteredMovies.length > 0 ? (
-                    filteredMovies.map((movie) => (
-                        <div key={movie.id} className="movie-item">
-                            <h4>{movie.movieName}</h4>
-                            <p>Director: {movie.directorName}</p>
-                            <p>Year Released: {movie.yearReleased}</p>
-                            <p>Rating: {movie.movieRating}</p>
-                            <p>Length: {movie.movieLength}</p>
-                            <p>Description: {movie.shortDescription}</p>
-                            <p>Status: {movie.status}</p>
-                            <p>Show Dates: {movie.showDates.join(', ')}</p>
-                            <p>Show Times: {movie.showTimes.join(', ')}</p>
-                            <p>Genre: {movie.genre}</p>
-                            <img src={movie.moviePoster} alt={`${movie.movieName} Poster`} className="movie-poster" />
-                            <a href={movie.trailerUrl} target="_blank" rel="noopener noreferrer">Watch Trailer</a>
-                        </div>
-                    ))
-                ) : (
-                    <p>No movies found.</p>
+                {confirmationMessage && (
+                    <p className="confirmation-text">
+                        {confirmationMessage}
+                    </p>
                 )}
             </div>
         </div>

@@ -83,3 +83,11 @@
 .delete-button:hover {
     text-decoration: underline;
 }
+
+.confirmation-text {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+

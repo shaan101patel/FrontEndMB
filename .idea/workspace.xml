@@ -4,26 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="fixed css">
+    <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="fixed checkout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-app/src/app/ManageMovie/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/ManageMovie/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/ManageUser/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/ManageUser/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/OrderConfirmation/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/OrderConfirmation/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/Success/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/Success/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/confirmation/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/confirmation/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/login/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/login/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/profile/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/profile/page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/ManageMovie/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/ManageMovie/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-app/src/app/promotions/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/promotions/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/register/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/register/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/search/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/search/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/tickets/[id]/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/tickets/[id]/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/tickets/[id]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/tickets/[id]/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/promotions/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/promotions/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +83,10 @@
       <workItem from="1730832509729" duration="152000" />
       <workItem from="1730840892098" duration="639000" />
       <workItem from="1730997268567" duration="3616000" />
+      <workItem from="1731102175635" duration="296000" />
+      <workItem from="1731343539687" duration="805000" />
+      <workItem from="1731346603587" duration="1842000" />
+      <workItem from="1731605466935" duration="1432000" />
     </task>
     <task id="LOCAL-00001" summary="testing">
       <option name="closed" value="true" />
@@ -146,11 +136,30 @@
       <option name="project" value="LOCAL" />
       <updated>1730831564511</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fixed checkout">
+      <option name="closed" value="true" />
+      <created>1731102400402</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1731102400402</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="testing" />
@@ -159,6 +168,7 @@
     <MESSAGE value="tickets" />
     <MESSAGE value="tickets css" />
     <MESSAGE value="fixed css" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed css" />
+    <MESSAGE value="fixed checkout" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed checkout" />
   </component>
 </project>

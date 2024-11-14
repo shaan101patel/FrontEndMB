@@ -5,11 +5,11 @@ import { addPromotion } from '../movieService'; // Adjust the path if necessary
 import './page.css';
 
 export default function ManagePromotions() {
-    const [promotions, setPromotions] = useState([]);
     const [newPromotion, setNewPromotion] = useState({ title: '', discount: '', validUntil: '' });
     const [error, setError] = useState('');
+    const [confirmationMessage, setConfirmationMessage] = useState(''); // State for confirmation message
 
-    // Function to add a new promotion to the list and notify users
+    // Function to add a new promotion and display confirmation message
     const handleAddPromotion = async () => {
         if (!newPromotion.title || !newPromotion.discount || !newPromotion.validUntil) {
             alert("Please fill in all fields.");
@@ -18,25 +18,19 @@ export default function ManagePromotions() {
 
         try {
             // Call the addPromotion function to send data to the backend
-            const addedPromotion = await addPromotion(newPromotion);
+            await addPromotion(newPromotion);
 
-            // Add the new promotion to the local state
-            const updatedPromotions = [
-                ...promotions,
-                { id: addedPromotion.id, ...newPromotion }, // Assuming the backend returns the new promotion with an id
-            ];
-            setPromotions(updatedPromotions);
-            setNewPromotion({ title: '', discount: '', validUntil: '' }); // Reset input fields
+            // Show success message and reset input fields
+            setConfirmationMessage("Promotion added successfully!");
+            setNewPromotion({ title: '', discount: '', validUntil: '' }); // Clear inputs
+
+            // Hide the confirmation message after a few seconds
+            setTimeout(() => setConfirmationMessage(''), 3000);
+
         } catch (error) {
             console.error("Error adding promotion:", error);
             setError("Failed to add promotion. Please try again.");
         }
-    };
-
-    // Function to delete a promotion from the list
-    const handleDeletePromotion = (id) => {
-        const updatedPromotions = promotions.filter(promotion => promotion.id !== id);
-        setPromotions(updatedPromotions);
     };
 
     return (
@@ -73,26 +67,11 @@ export default function ManagePromotions() {
                 >
                     Add Promotion
                 </button>
-            </div>
 
-            <ul className="promotions-list">
-                {promotions.map((promotion) => (
-                    <li key={promotion.id} className="promotion-item">
-                        <div>
-                            <p className="promotion-title">{promotion.title}</p>
-                            <p className="promotion-details">Discount: {promotion.discount}</p>
-                            <p className="promotion-details">Valid Until: {promotion.validUntil}</p>
-                        </div>
-                        <button
-                            onClick={() => handleDeletePromotion(promotion.id)}
-                            className="delete-button"
-                        >
-                            Delete
-                        </button>
-                    </li>
-                ))}
-            </ul>
+                {confirmationMessage && (
+                    <p className="confirmation-text">{confirmationMessage}</p>
+                )}
+            </div>
         </div>
     );
 }
-

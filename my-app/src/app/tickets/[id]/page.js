@@ -382,6 +382,16 @@ export default function TicketPurchase({ params }) {
     ];
 
     useEffect(() => {
+        // Check if the user is logged in
+        const userRole = localStorage.getItem('userRole');
+        if (!userRole) {
+            // Redirect to login page if not logged in
+            router.push('/login');
+        }
+    }, []); // Make sure to add a dependency array to avoid infinite loops
+
+
+    useEffect(() => {
         const fetchMovie = async () => {
             if (!id) return;
             try {
