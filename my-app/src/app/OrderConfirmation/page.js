@@ -42,7 +42,7 @@ export default function OrderConfirmation() {
         return <p>Loading...</p>;
     }
 
-    const { order, orderTotal, userEmail, movieDate, movieTime } = orderData;
+    const { order, orderTotal, userEmail, movieDate, movieTime, movieName } = orderData;
 
     return (
         <div className="order-confirmation-container">
@@ -69,6 +69,8 @@ export default function OrderConfirmation() {
                     <p>Email: {userEmail}</p>
                     <p>Date of Movie: {movieDate}</p>
                     <p>Time: {movieTime}</p>
+                    <p>Movie Name: {movieName}</p>
+
                 </div>
 
                 <p className="confirmation-email">A confirmation email has been sent to your inbox.</p>

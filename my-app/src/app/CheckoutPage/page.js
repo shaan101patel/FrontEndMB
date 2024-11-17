@@ -504,6 +504,8 @@ export default function CheckoutPage() {
             orderData.userEmail = email;
             orderData.movieDate = orderData.selectedDate;
             orderData.movieTime = orderData.selectedTime;
+            orderData.movieName = orderData.movieName; // Include movieName explicitly
+
 
             const orderDataString = JSON.stringify(orderData);
             router.push(`/OrderConfirmation?orderData=${encodeURIComponent(orderDataString)}`);
