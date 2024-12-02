@@ -83,13 +83,13 @@ import { addPromotion } from '../movieService'; // Adjust the path if necessary
 import './page.css';
 
 export default function ManagePromotions() {
-    const [newPromotion, setNewPromotion] = useState({ title: '', discount: '', validUntil: '' });
+    const [newPromotion, setNewPromotion] = useState({ title: '', discount: '', code: '', validUntil: '' });
     const [error, setError] = useState('');
     const [confirmationMessage, setConfirmationMessage] = useState(''); // State for confirmation message
 
     // Function to add a new promotion and display confirmation message
     const handleAddPromotion = async () => {
-        if (!newPromotion.title || !newPromotion.discount || !newPromotion.validUntil) {
+        if (!newPromotion.title || !newPromotion.discount || !newPromotion.code || !newPromotion.validUntil) {
             alert("Please fill in all fields.");
             return;
         }
@@ -105,6 +105,7 @@ export default function ManagePromotions() {
         const promotionData = {
             title: newPromotion.title,
             discount: discountValue, // Store the discount as an integer
+            code: newPromotion.code,
             validUntil: newPromotion.validUntil,
         };
 
@@ -114,7 +115,7 @@ export default function ManagePromotions() {
 
             // Show success message and reset input fields
             setConfirmationMessage("Promotion added successfully!");
-            setNewPromotion({ title: '', discount: '', validUntil: '' }); // Clear inputs
+            setNewPromotion({ title: '', discount: '', code: '', validUntil: '' }); // Clear inputs
 
             // Hide the confirmation message after a few seconds
             setTimeout(() => setConfirmationMessage(''), 3000);
@@ -137,20 +138,27 @@ export default function ManagePromotions() {
                     type="text"
                     placeholder="Promotion Title"
                     value={newPromotion.title}
-                    onChange={(e) => setNewPromotion({ ...newPromotion, title: e.target.value })}
+                    onChange={(e) => setNewPromotion({...newPromotion, title: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="text"
                     placeholder="Discount (e.g., 20)"
                     value={newPromotion.discount}
-                    onChange={(e) => setNewPromotion({ ...newPromotion, discount: e.target.value })}
+                    onChange={(e) => setNewPromotion({...newPromotion, discount: e.target.value})}
+                    className="input-field"
+                />
+                <input
+                    type="text"
+                    placeholder="Code"
+                    value={newPromotion.code}
+                    onChange={(e) => setNewPromotion({...newPromotion, code: e.target.value})}
                     className="input-field"
                 />
                 <input
                     type="date"
                     value={newPromotion.validUntil}
-                    onChange={(e) => setNewPromotion({ ...newPromotion, validUntil: e.target.value })}
+                    onChange={(e) => setNewPromotion({...newPromotion, validUntil: e.target.value})}
                     className="input-field"
                 />
                 <button
