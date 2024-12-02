@@ -1189,9 +1189,16 @@ export default function CheckoutPage() {
         expiryDate: '',
         cvv: '',
     });
+    const [creditCardMessage, setCreditCardMessage] = useState('');
+    const [cardMessageType, setCardMessageType] = useState(''); // success or error
+
     const [promotions, setPromotions] = useState([]); // State to store promotions
     const [promotionCode, setPromotionCode] = useState(''); // State for entered promotion code
     const [selectedPromotion, setSelectedPromotion] = useState(null); // Store selected promotion
+    const [promotionMessage, setPromotionMessage] = useState('');
+    const [messageType, setMessageType] = useState(''); // success or error
+
+
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -1253,6 +1260,7 @@ export default function CheckoutPage() {
         setNewCreditCard((prevState) => ({ ...prevState, [name]: value }));
     };
 
+    /*
     const addCreditCard = async () => {
         if (!newCreditCard.cardNumber || !newCreditCard.expiryDate || !newCreditCard.cvv) {
             alert('Please fill in all credit card details.');
@@ -1292,10 +1300,58 @@ export default function CheckoutPage() {
         }
     };
 
+     */
+
+    const addCreditCard = async () => {
+        if (!newCreditCard.cardNumber || !newCreditCard.expiryDate || !newCreditCard.cvv) {
+            setCreditCardMessage('Please fill in all credit card details.');
+            setCardMessageType('error');
+            return;
+        }
+
+        if (userProfile?.creditCards.length >= 3) {
+            setCreditCardMessage('You cannot add more than 3 credit cards.');
+            setCardMessageType('error');
+            return;
+        }
+
+        const cardLast4 = newCreditCard.cardNumber.slice(-4);
+
+        const updatedCards = [
+            ...userProfile.creditCards,
+            {
+                cardLast4,
+                expiryDate: newCreditCard.expiryDate,
+                cvv: newCreditCard.cvv,
+            },
+        ];
+
+        try {
+            await updateUserProfile({
+                ...userProfile,
+                creditCards: updatedCards,
+            });
+            setUserProfile((prev) => ({
+                ...prev,
+                creditCards: updatedCards,
+            }));
+            setNewCreditCard({ cardNumber: '', expiryDate: '', cvv: '' });
+            setCreditCardMessage('Card added successfully!');
+            setCardMessageType('success');
+        } catch (error) {
+            console.error('Failed to update profile:', error);
+            setCreditCardMessage('Failed to add credit card.');
+            setCardMessageType('error');
+        }
+    };
+
+
+
     const handlePromotionCodeChange = (e) => {
         setPromotionCode(e.target.value);
     };
 
+    /*
     const handleApplyPromotion = () => {
         const matchedPromotion = promotions.find(promotion => promotion.title === promotionCode);
         if (matchedPromotion) {
@@ -1311,6 +1367,28 @@ export default function CheckoutPage() {
             alert('Invalid promotion code.');
         }
     };
+
+     */
+
+    const handleApplyPromotion = () => {
+        const matchedPromotion = promotions.find(promotion => promotion.title === promotionCode);
+        if (matchedPromotion) {
+            setSelectedPromotion(matchedPromotion);
+            const discountAmount = (orderData.orderTotal * matchedPromotion.discount) / 100;
+            const updatedTotal = orderData.orderTotal - discountAmount;
+            setOrderData(prevOrderData => ({
+                ...prevOrderData,
+                orderTotal: updatedTotal,
+            }));
+            setPromotionMessage('Promotion applied successfully!');
+            setMessageType('success');
+        } else {
+            setPromotionMessage('Invalid promotion code.');
+            setMessageType('error');
+        }
+    };
+
+
 
     const handleCheckout = () => {
         if (
@@ -1355,6 +1433,20 @@ export default function CheckoutPage() {
             <h2 className="checkout-title">Checkout</h2>
             <p className="checkout-subtitle">Confirm your payment details below.</p>
 
+            {orderData && (
+                <div className="movie-details">
+                    <h3>Movie: {orderData.movieName}</h3>
+                    <p><strong>Date:</strong> {orderData.selectedDate}</p>
+                    <p><strong>Time:</strong> {orderData.selectedTime}</p>
+                    <h4>Seats Selected:</h4>
+                    <ul className="seats-list">
+                        {orderData.order.map((ticket) => (
+                            <li key={ticket.seat}>{ticket.seat} ({ticket.age}): ${ticket.price.toFixed(2)}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
             {loading ? (
                 <p>Loading payment information...</p>
             ) : userProfile ? (
@@ -1383,35 +1475,6 @@ export default function CheckoutPage() {
             ) : (
                 <p>No user profile found.</p>
             )}
-
-            {orderData && (
-                <div className="movie-details">
-                    <h3>Movie: {orderData.movieName}</h3>
-                    <p><strong>Date:</strong> {orderData.selectedDate}</p>
-                    <p><strong>Time:</strong> {orderData.selectedTime}</p>
-                    <h4>Seats Selected:</h4>
-                    <ul className="seats-list">
-                        {orderData.order.map((ticket) => (
-                            <li key={ticket.seat}>{ticket.seat} ({ticket.age}): ${ticket.price.toFixed(2)}</li>
-                        ))}
-                    </ul>
-                    <p className="total-amount">
-                        <strong>Total: </strong>
-                        ${orderData?.orderTotal?.toFixed(2) || '0.00'}
-                    </p>
-                </div>
-            )}
-
-            <div className="promotion-section">
-                <h3>Enter Promotion Code</h3>
-                <input
-                    type="text"
-                    value={promotionCode}
-                    onChange={handlePromotionCodeChange}
-                    placeholder="Enter promotion code"
-                />
-                <button onClick={handleApplyPromotion}>Apply Promotion</button>
-            </div>
 
             {userProfile?.creditCards.length < 3 && (
                 <div className="credit-card-form">
@@ -1447,12 +1510,46 @@ export default function CheckoutPage() {
                         />
                     </div>
                     <button onClick={addCreditCard}>Add Credit Card</button>
+
+                    {/* Display the credit card message */}
+                    {creditCardMessage && (
+                        <p className={`credit-card-message ${cardMessageType === 'success' ? 'success' : 'error'}`}>
+                            {creditCardMessage}
+                        </p>
+                    )}
                 </div>
             )}
+
+            <div className="promotion-section">
+                <h3>Enter Promotion Code</h3>
+                <input
+                    type="text"
+                    value={promotionCode}
+                    onChange={handlePromotionCodeChange}
+                    placeholder="Enter promotion code"
+                />
+                <button onClick={handleApplyPromotion}>Apply Promotion</button>
+
+                {promotionMessage && (
+                    <p className={`promotion-message ${messageType === 'success' ? 'success' : 'error'}`}>
+                        {promotionMessage}
+                    </p>
+                )}
+            </div>
 
             <div className="checkout-buttons">
                 <button onClick={handleCheckout} className="checkout-button">Proceed to Payment</button>
             </div>
+
+            {orderData && (
+                <div className="order-total">
+                    <p><strong>Total: </strong>${(orderData?.orderTotal).toFixed(2) || '0.00'}</p>
+                </div>
+            )}
+
         </div>
     );
+
+
+
 }

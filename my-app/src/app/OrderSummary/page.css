@@ -95,3 +95,11 @@
     background-color: #2980b9; /* Darker blue on hover */
 }
 
+/* For Order Summary Page */
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}

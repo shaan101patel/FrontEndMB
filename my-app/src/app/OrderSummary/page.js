@@ -247,10 +247,11 @@ export default function OrderSummary() {
                 </table>
 
                 {/* Order Total */}
-                <div className="order-total">
+                <div className="summary-total">
                     <span>Order Total:</span>
                     <span>${orderTotal.toFixed(2)}</span>
                 </div>
+
 
                 {/* Confirm and Checkout Button */}
                 <div className="order-actions">

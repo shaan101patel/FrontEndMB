@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="fixed admin pages">
+    <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.js" afterDir="false" />
@@ -94,7 +94,7 @@
       <workItem from="1732050774021" duration="1892000" />
       <workItem from="1732072721040" duration="443000" />
       <workItem from="1732952475823" duration="126000" />
-      <workItem from="1733105058618" duration="1764000" />
+      <workItem from="1733105058618" duration="3479000" />
     </task>
     <task id="LOCAL-00001" summary="testing">
       <option name="closed" value="true" />
@@ -160,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731607222691</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="css">
+      <option name="closed" value="true" />
+      <created>1733107075941</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733107075941</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,6 +194,7 @@
     <MESSAGE value="fixed css" />
     <MESSAGE value="fixed checkout" />
     <MESSAGE value="fixed admin pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed admin pages" />
+    <MESSAGE value="css" />
+    <option name="LAST_COMMIT_MESSAGE" value="css" />
   </component>
 </project>

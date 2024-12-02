@@ -146,3 +146,46 @@
 .checkout-button:hover {
     background-color: #218838;
 }
+
+.checkout-container {
+    position: relative;
+    padding: 20px;
+}
+
+.order-total {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.promotion-message {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.promotion-message.success {
+    color: green;
+}
+
+.promotion-message.error {
+    color: red;
+}
+
+.credit-card-message {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.credit-card-message.success {
+    color: green;
+}
+
+.credit-card-message.error {
+    color: red;
+}
+
