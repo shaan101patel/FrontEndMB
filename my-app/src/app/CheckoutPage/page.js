@@ -1168,6 +1168,8 @@ export default function CheckoutPage() {
     );
 }*/
 
+
+
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -1333,11 +1335,13 @@ export default function CheckoutPage() {
                 };
             }
 
+            /*
             // Apply promotion discount if selected
-            /*if (selectedPromotion) {
+            if (selectedPromotion) {
                 const discountAmount = (orderData.orderTotal * selectedPromotion.discount) / 100;
                 orderData.orderTotal -= discountAmount;
-            }*/
+            }
+            */
 
             const orderDataString = JSON.stringify(orderData);
             router.push(`/OrderConfirmation?orderData=${encodeURIComponent(orderDataString)}`);
