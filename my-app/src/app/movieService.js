@@ -11,7 +11,21 @@ const ADD_MOVIE_URL = 'http://localhost:9090/add-movie'; // URL for adding a new
 const PROMOTION_OPTIN_URL = 'http://localhost:9090/api/users/promotion-optin';
 const ADD_PROMOTION_URL = 'http://localhost:9090/api/promotions/add';
 const SEND_EMAIL_URL = 'http://localhost:9090/send-confirmation-email';
+const GET_PROMOTIONS_URL = 'http://localhost:9090/api/promotions'; // Corrected promotions URL
 
+// Fetch promotions from the backend
+export const fetchPromotions = async () => {
+    try {
+        const response = await fetch(GET_PROMOTIONS_URL); // Use the correct API endpoint here
+        if (!response.ok) {
+            throw new Error('Failed to fetch promotions');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
 
 // Function to send order confirmation email
 export const sendOrderConfirmationEmail = async (orderData) => {
