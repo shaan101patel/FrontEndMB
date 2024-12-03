@@ -441,13 +441,14 @@ export default function TicketPurchase({ params }) {
         setAgeCategories(prev => ({ ...prev, [seat]: age }));
     };
 
-    const handleConfirmBooking = async () => {
+    /*const handleConfirmBooking = async () => {
         if (!selectedDate || !selectedTime || selectedSeats.length === 0 || Object.keys(ageCategories).length !== selectedSeats.length) {
             alert('Please complete all selections before proceeding.');
             return;
         }
 
         const bookingData = {
+            email,
             movieName: selectedMovie.movieName,
             selectedDate,
             selectedTime,
@@ -474,7 +475,53 @@ export default function TicketPurchase({ params }) {
             console.error("Error creating booking:", error);
             alert('An error occurred while saving your booking.');
         }
+    };*/
+
+    const handleConfirmBooking = async () => {
+        // Retrieve the user's email from localStorage
+        const email = localStorage.getItem('userEmail'); // Make sure this is set during login
+
+        if (!email) {
+            alert('User email is missing. Please log in again.');
+            router.push('/login'); // Redirect to login if email is missing
+            return;
+        }
+
+        if (!selectedDate || !selectedTime || selectedSeats.length === 0 || Object.keys(ageCategories).length !== selectedSeats.length) {
+            alert('Please complete all selections before proceeding.');
+            return;
+        }
+
+        const bookingData = {
+            email, // Include the retrieved email
+            movieName: selectedMovie.movieName,
+            selectedDate,
+            selectedTime,
+            selectedSeats,
+            ageCategories,
+        };
+
+        try {
+            const bookingResponse = await createBooking(bookingData);
+            if (bookingResponse.success) {
+                const orderData = new URLSearchParams({
+                    movieName: selectedMovie.movieName,
+                    selectedDate,
+                    selectedTime,
+                    selectedSeats: JSON.stringify(selectedSeats),
+                    ageCategories: JSON.stringify(ageCategories),
+                }).toString();
+
+                router.push(`/OrderSummary?${orderData}`);
+            } else {
+                alert('Booking failed. Please try again later.');
+            }
+        } catch (error) {
+            console.error("Error creating booking:", error);
+            alert('An error occurred while saving your booking.');
+        }
     };
+
 
     return (
         <div className="ticket-purchase-container">

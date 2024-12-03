@@ -149,13 +149,20 @@ export default function Home() {
                             <h2 className="text-3xl font-bold mb-4 text-center">{selectedMovie.movieName}</h2>
                             <div className="text-lg mb-4">
                                 <p><strong>Director:</strong> {selectedMovie.directorName}</p>
-                                <p><strong>Producer:</strong> {selectedMovie.producer || 'N/A'}</p>
                                 <p><strong>Year Released:</strong> {selectedMovie.yearReleased}</p>
                                 <p><strong>Rating:</strong> {selectedMovie.movieRating}</p>
                                 <p><strong>Length:</strong> {selectedMovie.movieLength}</p>
                                 <p><strong>Description:</strong> {selectedMovie.shortDescription}</p>
-                                <p><strong>Show Dates:</strong> {selectedMovie.showDates ? selectedMovie.showDates.join(', ') : 'N/A'}</p>
-                                <p><strong>Show Times:</strong> {selectedMovie.showTimes ? selectedMovie.showTimes.join(', ') : 'N/A'}</p>
+
+                                <p><strong>Genre:</strong> {selectedMovie.genre}</p>
+                                <p><strong>Show Room:</strong> {selectedMovie.showRoom}</p>
+
+                                <p><strong>Show
+                                    Dates:</strong> {selectedMovie.showDates ? selectedMovie.showDates.join(', ') : 'N/A'}
+                                </p>
+                                <p><strong>Show
+                                    Times:</strong> {selectedMovie.showTimes ? selectedMovie.showTimes.join(', ') : 'N/A'}
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -13,6 +13,20 @@ const ADD_PROMOTION_URL = 'http://localhost:9090/api/promotions/add';
 const SEND_EMAIL_URL = 'http://localhost:9090/send-confirmation-email';
 const GET_PROMOTIONS_URL = 'http://localhost:9090/api/promotions'; // Corrected promotions URL
 
+
+export const fetchBookingsByEmail = async (email) => {
+    try {
+        const response = await axios.get('http://localhost:9090/api/bookings', {
+            params: { email }, // Pass the email as query parameter
+        });
+
+        return response.data; // Assuming the API returns a list of bookings
+    } catch (error) {
+        console.error("Error fetching bookings by email:", error);
+        throw error; // Throw the error to handle it in the component
+    }
+};
+
 // Fetch promotions from the backend
 export const fetchPromotions = async () => {
     try {
