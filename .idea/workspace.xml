@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="css">
+    <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="added checkout css">
+      <change afterPath="$PROJECT_DIR$/my-app/src/app/orderHistory/page.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/orderHistory/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/orderHistory/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +94,12 @@
       <workItem from="1732050774021" duration="1892000" />
       <workItem from="1732072721040" duration="443000" />
       <workItem from="1732952475823" duration="126000" />
-      <workItem from="1733105058618" duration="3479000" />
+      <workItem from="1733105058618" duration="3737000" />
+      <workItem from="1733108816701" duration="16000" />
+      <workItem from="1733109928079" duration="133000" />
+      <workItem from="1733111890978" duration="1019000" />
+      <workItem from="1733160517757" duration="2843000" />
+      <workItem from="1733258056194" duration="1015000" />
     </task>
     <task id="LOCAL-00001" summary="testing">
       <option name="closed" value="true" />
@@ -168,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733107075941</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="added checkout css">
+      <option name="closed" value="true" />
+      <created>1733108768478</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733108768478</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,6 +208,19 @@
     <MESSAGE value="fixed checkout" />
     <MESSAGE value="fixed admin pages" />
     <MESSAGE value="css" />
-    <option name="LAST_COMMIT_MESSAGE" value="css" />
+    <MESSAGE value="added checkout css" />
+    <option name="LAST_COMMIT_MESSAGE" value="added checkout css" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/my-app/src/app/orderHistory/page.js</url>
+          <line>83</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,0 +1,5 @@
+.border {
+    border: 2px solid black; /* Solid black border */
+    border-radius: 4px; /* Slight rounding for a clean look (optional) */
+}
+
