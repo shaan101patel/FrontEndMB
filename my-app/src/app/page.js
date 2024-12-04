@@ -2,18 +2,17 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-``
 import SearchBar from './search/page'; // Adjust the import as necessary
 import { fetchMovies, searchMovies } from './movieService';
 
 export default function Home() {
-
     const router = useRouter(); // Initialize useRouter
     const [currentlyRunning, setCurrentlyRunning] = useState([]);
     const [comingSoon, setComingSoon] = useState([]);
     const [activeSection, setActiveSection] = useState('currentlyRunning');
     const [loading, setLoading] = useState(true);
     const [selectedMovie, setSelectedMovie] = useState(null);
+    const [error, setError] = useState(''); // Declare the error state
 
     useEffect(() => {
         const loadMovies = async () => {
@@ -65,6 +64,7 @@ export default function Home() {
             setError('Failed to book ticket. Please try again.'); // Set error message
         }
     };
+
     const renderMovies = (movies) => (
         <div className="flex flex-wrap justify-center gap-6">
             {movies.map(movie => (
@@ -126,7 +126,6 @@ export default function Home() {
                 {selectedMovie && (
                     <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center">
                         <div className="relative bg-gray-900 p-8 rounded-lg shadow-lg w-full h-full md:w-[70%] md:h-[80%] overflow-auto">
-                            {/* Close Button */}
                             <button
                                 onClick={closeModal}
                                 className="absolute top-4 right-4 text-2xl font-bold text-gray-500 hover:text-gray-700 bg-gray-700 p-2 rounded-full shadow-md z-10"
@@ -134,7 +133,6 @@ export default function Home() {
                             >
                                 ✖
                             </button>
-                            {/* Movie Trailer */}
                             <div className="relative pt-[56.25%] mb-6">
                                 <iframe
                                     src={selectedMovie.trailerUrl.replace('watch?v=', 'embed/')}
@@ -145,7 +143,6 @@ export default function Home() {
                                     className="absolute top-0 left-0 w-full h-full rounded-lg"
                                 />
                             </div>
-                            {/* Movie Details */}
                             <h2 className="text-3xl font-bold mb-4 text-center">{selectedMovie.movieName}</h2>
                             <div className="text-lg mb-4">
                                 <p><strong>Director:</strong> {selectedMovie.directorName}</p>
@@ -153,26 +150,14 @@ export default function Home() {
                                 <p><strong>Rating:</strong> {selectedMovie.movieRating}</p>
                                 <p><strong>Length:</strong> {selectedMovie.movieLength}</p>
                                 <p><strong>Description:</strong> {selectedMovie.shortDescription}</p>
-
                                 <p><strong>Genre:</strong> {selectedMovie.genre}</p>
                                 <p><strong>Show Room:</strong> {selectedMovie.showRoom}</p>
-
-                                <p><strong>Show
-                                    Dates:</strong> {selectedMovie.showDates ? selectedMovie.showDates.join(', ') : 'N/A'}
-                                </p>
-                                <p><strong>Show
-                                    Times:</strong> {selectedMovie.showTimes ? selectedMovie.showTimes.join(', ') : 'N/A'}
-                                </p>
+                                <p><strong>Show Dates:</strong> {selectedMovie.showDates ? selectedMovie.showDates.join(', ') : 'N/A'}</p>
+                                <p><strong>Show Times:</strong> {selectedMovie.showTimes ? selectedMovie.showTimes.join(', ') : 'N/A'}</p>
                             </div>
                         </div>
                     </div>
                 )}
-
-
-
-
-
-
             </div>
         </div>
     );
