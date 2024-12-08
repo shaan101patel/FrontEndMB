@@ -1,6 +1,4 @@
-
 "use client";
-
 import React, { useState, useEffect } from 'react';
 import './page.css';
 import { useRouter } from 'next/navigation';
@@ -14,6 +12,7 @@ export default function OrderSummary() {
     const [selectedTime, setSelectedTime] = useState('');
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [ageCategories, setAgeCategories] = useState({});
+    const [loading, setLoading] = useState(true); // Added loading state
 
     useEffect(() => {
         const { searchParams } = new URL(window.location.href);
@@ -45,6 +44,8 @@ export default function OrderSummary() {
         setOrder(orderDetails);
         const total = orderDetails.reduce((total, ticket) => total + ticket.price, 0);
         setOrderTotal(total);
+
+        setLoading(false); // Stop loading when data is fetched and states are set
     }, []);
 
     const handleDeleteTicket = (seat) => {
@@ -79,6 +80,10 @@ export default function OrderSummary() {
     const handleEditPurchase = () => {
         router.back();
     };
+
+    if (loading) {
+        return <div>Loading...</div>; // Add a loading state to prevent rendering before data is loaded
+    }
 
     return (
         <div className="order-summary-container">
@@ -136,4 +141,3 @@ export default function OrderSummary() {
         </div>
     );
 }
-

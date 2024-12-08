@@ -47,13 +47,16 @@
 
 /* Shared Button Styles */
 .button {
-    padding: 8px 15px; /* Smaller padding */
+    padding: 10px 20px; /* Adjusted padding for consistency */
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 14px;
-    min-width: 120px; /* Smaller button width */
+    width: 200px; /* Ensure both buttons are the same width */
+    text-align: center;
+    white-space: nowrap; /* Prevent text from wrapping */
+    font-weight: normal; /* Ensure consistent font weight */
 }
 
 /* Specific Button Styles */
