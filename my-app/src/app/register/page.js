@@ -203,7 +203,7 @@ const Registration = () => {
                         </div>
 
                         {/* Credit Card Information Section */}
-                        <h3 className="text-lg font-semibold mt-4">Credit Card Information</h3>
+                        <h3 className="text-lg font-semibold mt-4">Credit Card Information (max of 3)</h3>
 
                         {creditCards.map((card, index) => (
                             <div key={index} className="mb-4">

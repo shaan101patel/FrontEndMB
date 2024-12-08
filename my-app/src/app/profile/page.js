@@ -264,7 +264,7 @@ export default function EditProfile() {
                                 <div className="form-group">
                                     <label htmlFor="creditCardNumber">Credit Card Number</label>
                                     <input
-                                        type="password"
+                                        type="text"
                                         id="creditCardNumber"
                                         name="creditCardNumber"
                                         value={newCreditCard.creditCardNumber}

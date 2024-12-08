@@ -91,4 +91,11 @@
     text-align: center;
 }
 
+.error-text {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
 
