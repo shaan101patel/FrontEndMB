@@ -88,48 +88,6 @@ export default function CheckoutPage() {
         setNewCreditCard((prevState) => ({ ...prevState, [name]: value }));
     };
 
-    /*
-    const addCreditCard = async () => {
-        if (!newCreditCard.cardNumber || !newCreditCard.expiryDate || !newCreditCard.cvv) {
-            alert('Please fill in all credit card details.');
-            return;
-        }
-
-        if (userProfile?.creditCards.length >= 3) {
-            alert('You cannot add more than 3 credit cards.');
-            return;
-        }
-
-        const cardLast4 = newCreditCard.cardNumber.slice(-4);
-
-        const updatedCards = [
-            ...userProfile.creditCards,
-            {
-                cardLast4,
-                expiryDate: newCreditCard.expiryDate,
-                cvv: newCreditCard.cvv,
-            },
-        ];
-
-        try {
-            await updateUserProfile({
-                ...userProfile,
-                creditCards: updatedCards,
-            });
-            setUserProfile((prev) => ({
-                ...prev,
-                creditCards: updatedCards,
-            }));
-            setNewCreditCard({ cardNumber: '', expiryDate: '', cvv: '' });
-            alert('Card added successfully!');
-        } catch (error) {
-            console.error('Failed to update profile:', error);
-            alert('Failed to add credit card.');
-        }
-    };
-
-     */
-
     const addCreditCard = async () => {
         if (!newCreditCard.cardNumber || !newCreditCard.expiryDate || !newCreditCard.cvv) {
             setCreditCardMessage('Please fill in all credit card details.');
@@ -179,25 +137,6 @@ export default function CheckoutPage() {
         setPromotionCode(e.target.value);
     };
 
-    /*
-    const handleApplyPromotion = () => {
-        const matchedPromotion = promotions.find(promotion => promotion.title === promotionCode);
-        if (matchedPromotion) {
-            setSelectedPromotion(matchedPromotion);
-            const discountAmount = (orderData.orderTotal * matchedPromotion.discount) / 100;
-            const updatedTotal = orderData.orderTotal - discountAmount;
-            setOrderData(prevOrderData => ({
-                ...prevOrderData,
-                orderTotal: updatedTotal, // Update the total with the new amount after applying the promotion
-            }));
-            alert('Promotion applied successfully!');
-        } else {
-            alert('Invalid promotion code.');
-        }
-    };
-
-     */
-
     const handleApplyPromotion = () => {
         const matchedPromotion = promotions.find(promotion => promotion.code === promotionCode);
         if (matchedPromotion) {
@@ -240,14 +179,6 @@ export default function CheckoutPage() {
                     expiryDate: newCreditCard.expiryDate,
                 };
             }
-
-            /*
-            // Apply promotion discount if selected
-            if (selectedPromotion) {
-                const discountAmount = (orderData.orderTotal * selectedPromotion.discount) / 100;
-                orderData.orderTotal -= discountAmount;
-            }
-            */
 
             const orderDataString = JSON.stringify(orderData);
             router.push(`/OrderConfirmation?orderData=${encodeURIComponent(orderDataString)}`);

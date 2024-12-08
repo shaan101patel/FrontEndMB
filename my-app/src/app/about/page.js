@@ -1,4 +1,3 @@
-// app/about/page.js
 
 "use client";
 

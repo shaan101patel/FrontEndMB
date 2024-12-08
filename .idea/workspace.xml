@@ -6,9 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="order history css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/profile/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/profile/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/CheckoutPage/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/ManageMovie/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/ManageMovie/page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/ManageMovie/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/ManageMovie/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/about/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/about/page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/about/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/about/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/admin/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/admin/page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/admin/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/admin/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/confirmation/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/confirmation/page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/login/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/login/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +111,8 @@
       <workItem from="1733160517757" duration="2843000" />
       <workItem from="1733258056194" duration="1234000" />
       <workItem from="1733269410291" duration="1604000" />
+      <workItem from="1733674054698" duration="239000" />
+      <workItem from="1733674989933" duration="1337000" />
     </task>
     <task id="LOCAL-00001" summary="testing">
       <option name="closed" value="true" />
