@@ -1,4 +1,5 @@
 
+
 "use client"; // Ensure this is a Client Component
 
 import React, { useEffect, useState } from "react";
@@ -60,7 +61,10 @@ const Header = () => {
                 <nav>
                     <ul className="flex space-x-4">
                         <li>
-                            <Link href="/" className="text-white hover:text-gray-300">
+                            <Link
+                                href={userRole === "admin" ? "/admin" : "/"}
+                                className="text-white hover:text-gray-300"
+                            >
                                 Home
                             </Link>
                         </li>
@@ -110,3 +114,4 @@ const Header = () => {
 };
 
 export default Header;
+
