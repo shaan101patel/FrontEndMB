@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="deleted old code">
+    <list default="true" id="9abb70bc-7b9e-4ef2-9d2d-ccef9ec85f6d" name="Changes" comment="order summary buttons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/OrderSummary/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +101,8 @@
       <workItem from="1733258056194" duration="1234000" />
       <workItem from="1733269410291" duration="1604000" />
       <workItem from="1733674054698" duration="239000" />
-      <workItem from="1733674989933" duration="2054000" />
+      <workItem from="1733674989933" duration="2230000" />
+      <workItem from="1733695402961" duration="308000" />
     </task>
     <task id="LOCAL-00001" summary="testing">
       <option name="closed" value="true" />
@@ -199,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733677377320</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="order summary buttons">
+      <option name="closed" value="true" />
+      <created>1733678024171</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1733678024171</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +238,7 @@
     <MESSAGE value="added checkout css" />
     <MESSAGE value="order history css" />
     <MESSAGE value="deleted old code" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted old code" />
+    <MESSAGE value="order summary buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="order summary buttons" />
   </component>
 </project>
