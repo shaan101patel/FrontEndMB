@@ -76,6 +76,7 @@ export default function EditProfile() {
             return;
         }
 
+
         // Only store the last 4 digits of the card number
         const cardLast4 = newCreditCard.creditCardNumber.slice(-4);
 
