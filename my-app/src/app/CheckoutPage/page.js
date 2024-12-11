@@ -26,8 +26,6 @@ export default function CheckoutPage() {
     const [promotionMessage, setPromotionMessage] = useState('');
     const [messageType, setMessageType] = useState(''); // success or error
 
-
-
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const storedEmail = localStorage.getItem('userEmail');
@@ -89,7 +87,15 @@ export default function CheckoutPage() {
     };
 
     const addCreditCard = async () => {
-        if (!newCreditCard.cardNumber || !newCreditCard.expiryDate || !newCreditCard.cvv) {
+        // Validate that the card number is exactly 16 digits
+        const isCardNumberValid = /^[0-9]{16}$/.test(newCreditCard.cardNumber);
+        if (!isCardNumberValid) {
+            setCreditCardMessage('Please enter a valid 16-digit credit card number.');
+            setCardMessageType('error');
+            return;
+        }
+
+        if (!newCreditCard.expiryDate || !newCreditCard.cvv) {
             setCreditCardMessage('Please fill in all credit card details.');
             setCardMessageType('error');
             return;
@@ -131,8 +137,6 @@ export default function CheckoutPage() {
         }
     };
 
-
-
     const handlePromotionCodeChange = (e) => {
         setPromotionCode(e.target.value);
     };
@@ -154,8 +158,6 @@ export default function CheckoutPage() {
             setMessageType('error');
         }
     };
-
-
 
     const handleCheckout = () => {
         if (
@@ -305,7 +307,7 @@ export default function CheckoutPage() {
                     <p><strong>Total: </strong>${(orderData?.orderTotal).toFixed(2) || '0.00'}</p>
                 </div>
             )}
-
         </div>
     );
 }
+

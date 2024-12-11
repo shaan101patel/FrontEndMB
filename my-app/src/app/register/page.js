@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState } from 'react';
@@ -220,7 +221,6 @@ const Registration = () => {
                             />
                         </div>
 
-                        {/* Credit Card Information Section */}
                         <h3 className="text-lg font-semibold mt-4">Credit Card Information (max of 3)</h3>
 
                         {creditCards.map((card, index) => (
@@ -305,10 +305,3 @@ const Registration = () => {
 };
 
 export default Registration;
-
-
-
-
-
-
-
