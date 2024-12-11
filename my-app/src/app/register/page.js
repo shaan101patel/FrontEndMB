@@ -49,7 +49,7 @@ const Registration = () => {
         }
 
         // Check if credit card numbers have 16 digits
-        const invalidCard = creditCards.some(card =>
+        /*const invalidCard = creditCards.some(card =>
             !card?.number || card.number.replace(/\D/g, '').length !== 16
         );
         if (invalidCard) {
@@ -57,14 +57,13 @@ const Registration = () => {
             return;
         }
 
-        // Check if expiry dates are in MM/YY format
         const invalidExpiry = creditCards.some(card =>
             !card?.expiry || !/^((0[1-9])|(1[0-2]))\/(\d{2})$/.test(card.expiry)
         );
         if (invalidExpiry) {
             setError('Please enter a valid expiry date in MM/YY format (e.g., 12/24).');
             return;
-        }
+        }*/
 
         setError('');
 
